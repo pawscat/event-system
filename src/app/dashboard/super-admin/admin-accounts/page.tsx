@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import AdminAccountsClient from './admin-accounts-client'
+import { getUserAuthData } from '@/lib/actions/auth-actions'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,6 +13,8 @@ export default async function AdminAccountsPage() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     { cookies: { getAll() { return cookieStore.getAll() } } }
   )
+  const authData = await getUserAuthData()
+  const currentUserId = authData?.id
 
   // Fetch users and their assignments
   const { data: users, error } = await supabase
@@ -89,7 +92,7 @@ export default async function AdminAccountsPage() {
         {error ? (
           <div className="p-8 text-center text-error">Gagal memuat data akun admin. Detail: {error.message}</div>
         ) : (
-          <AdminAccountsClient initialUsers={formattedUsers} events={events || []} />
+          <AdminAccountsClient initialUsers={formattedUsers} events={events || []} currentUserId={currentUserId || ''} />
         )}
       </div>
     </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { createClient } from '@/lib/supabase/client'
 
 interface Assignment {
   id: string
@@ -26,7 +27,7 @@ interface Event {
   name: string
 }
 
-export default function AdminAccountsClient({ initialUsers, events }: { initialUsers: User[], events: Event[] }) {
+export default function AdminAccountsClient({ initialUsers, events, currentUserId }: { initialUsers: User[], events: Event[], currentUserId: string }) {
   const [users, setUsers] = useState<User[]>(initialUsers)
   const [search, setSearch] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -138,8 +139,34 @@ export default function AdminAccountsClient({ initialUsers, events }: { initialU
     }
   }
 
-  const formatRole = (global: string, assignment: Assignment | null) => {
-    if (global === 'super_admin') return 'Super Admin'
+  const handleToggleStatus = async (user: User) => {
+    if (user.id === currentUserId) return
+
+    const newStatus = user.status === 'active' ? 'inactive' : 'active'
+    if (!confirm(`Apakah Anda yakin ingin ${newStatus === 'active' ? 'mengaktifkan' : 'menonaktifkan'} akun ${user.full_name}?`)) return
+    
+    setIsSubmitting(true)
+    try {
+      const supabase = createClient()
+      const { error } = await supabase
+        .from('users')
+        .update({ status: newStatus })
+        .eq('id', user.id)
+
+      if (error) throw error
+
+      setUsers(prev => prev.map(u => 
+        u.id === user.id ? { ...u, status: newStatus } : u
+      ))
+    } catch (err: any) {
+      alert(err?.message || 'Gagal mengubah status akun.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const formatRole = (globalRole: string, assignment: Assignment | null) => {
+    if (globalRole === 'super_admin') return 'Super Admin'
     if (!assignment) return 'Admin (Belum Bertugas)'
     if (assignment.role === 'event_admin') return 'Admin Event'
     if (assignment.role === 'registration_admin') return 'Admin Registrasi'
@@ -177,7 +204,10 @@ export default function AdminAccountsClient({ initialUsers, events }: { initialU
             {filteredUsers.map(user => (
               <tr key={user.id} className="hover:bg-surface-container-lowest transition-colors">
                 <td className="p-4">
-                  <div className="font-semibold text-text-main text-[14px]">{user.full_name}</div>
+                  <div className="font-semibold text-text-main text-[14px]">
+                    {user.full_name} 
+                    {user.id === currentUserId && <span className="text-secondary italic font-normal text-[12px] ml-1">(Anda)</span>}
+                  </div>
                   <div className="text-text-muted text-[12px]">{user.email}</div>
                 </td>
                 <td className="p-4">
@@ -205,26 +235,47 @@ export default function AdminAccountsClient({ initialUsers, events }: { initialU
                   </span>
                 </td>
                 <td className="p-4 text-right">
-                  {user.global_role !== 'super_admin' && (
-                    <div className="flex justify-end gap-2">
-                      <button 
-                        onClick={() => handleOpenAssign(user)}
-                        className="p-1.5 text-text-muted hover:text-primary rounded hover:bg-surface-container-high transition-colors"
-                        title="Tugaskan ke Event"
+                  <div className="flex justify-end gap-2">
+                    <button
+                      className="p-1.5 text-text-muted hover:text-primary rounded hover:bg-surface-container-high transition-colors"
+                      title="Edit Profil Admin (Dalam Pengembangan)"
+                      onClick={() => alert('Fitur edit profil masih dalam pengembangan.')}
+                    >
+                      <span className="material-symbols-outlined text-[20px]">edit</span>
+                    </button>
+
+                    {user.id !== currentUserId && (
+                      <button
+                        className="p-1.5 text-text-muted hover:text-error rounded hover:bg-surface-container-high transition-colors"
+                        title={user.status === 'active' ? 'Nonaktifkan Akun' : 'Aktifkan Akun'}
+                        onClick={() => handleToggleStatus(user)}
+                        disabled={isSubmitting}
                       >
-                        <span className="material-symbols-outlined text-[20px]">assignment_ind</span>
+                        <span className="material-symbols-outlined text-[20px]">{user.status === 'active' ? 'block' : 'check_circle'}</span>
                       </button>
-                      {user.active_assignment && (
+                    )}
+
+                    {user.global_role !== 'super_admin' && (
+                      <>
                         <button 
-                          onClick={() => handleDeleteAssignment(user)}
-                          className="p-1.5 text-text-muted hover:text-error rounded hover:bg-surface-container-high transition-colors"
-                          title="Cabut Penugasan"
+                          onClick={() => handleOpenAssign(user)}
+                          className="p-1.5 text-text-muted hover:text-primary rounded hover:bg-surface-container-high transition-colors"
+                          title="Tugaskan ke Event"
                         >
-                          <span className="material-symbols-outlined text-[20px]">person_remove</span>
+                          <span className="material-symbols-outlined text-[20px]">assignment_ind</span>
                         </button>
-                      )}
-                    </div>
-                  )}
+                        {user.active_assignment && (
+                          <button 
+                            onClick={() => handleDeleteAssignment(user)}
+                            className="p-1.5 text-text-muted hover:text-error rounded hover:bg-surface-container-high transition-colors"
+                            title="Cabut Penugasan"
+                          >
+                            <span className="material-symbols-outlined text-[20px]">person_remove</span>
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
