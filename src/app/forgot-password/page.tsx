@@ -92,7 +92,18 @@ export default function ForgotPasswordPage() {
               {loading ? 'Mengirim...' : 'Kirim Tautan Pemulihan'}
             </button>
           </form>
-        ) : null}
+        ) : (
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={handleReset}
+              disabled={loading}
+              className="text-[14px] font-semibold text-primary hover:text-primary-container transition-colors disabled:opacity-50 flex items-center gap-1"
+            >
+              <span className="material-symbols-outlined text-[16px]">refresh</span>
+              {loading ? 'Mengirim ulang...' : 'Kirim ulang email'}
+            </button>
+          </div>
+        )}
 
         <div className="mt-8 text-center">
           <Link href="/login" className="inline-flex items-center gap-1 font-label-sm text-[14px] font-semibold text-text-muted hover:text-primary transition-colors">
