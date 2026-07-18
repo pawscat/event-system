@@ -14,10 +14,12 @@ export function SidebarNav({ dashboardType }: { dashboardType: DashboardType }) 
   if (dashboardType === 'super-admin') {
     links = [
       { href: '/dashboard/super-admin', label: 'Ringkasan Global', icon: 'monitoring' },
-      { href: '/dashboard/super-admin/events', label: 'Semua Acara', icon: 'event' },
+      { href: '/dashboard/super-admin/events', label: 'Manajemen Acara', icon: 'event' },
       { href: '/dashboard/super-admin/participants', label: 'Peserta Global', icon: 'groups' },
-      { href: '/dashboard/super-admin/users', label: 'Admin & Staf', icon: 'manage_accounts' },
-      { href: '/dashboard/super-admin/reports', label: 'Laporan Global', icon: 'assessment' },
+      { href: '/dashboard/super-admin/admin-accounts', label: 'Manajemen Admin', icon: 'manage_accounts' },
+      { href: '/dashboard/super-admin/global-reports', label: 'Laporan Global', icon: 'assessment' },
+      { href: '/dashboard/super-admin/audit-logs', label: 'Audit Log', icon: 'history' },
+      { href: '/dashboard/super-admin/settings', label: 'Pengaturan Global', icon: 'settings' },
     ]
   } else if (dashboardType === 'admin-event') {
     links = [

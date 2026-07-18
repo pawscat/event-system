@@ -35,28 +35,6 @@ export default async function EventSummaryPage(props: { params: Promise<{ eventI
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumbs & Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="text-body-sm text-[14px] text-text-muted mb-1 flex items-center gap-2">
-            <Link href="/dashboard/super-admin/events" className="hover:text-secondary cursor-pointer">Acara</Link>
-            <span className="material-symbols-outlined text-sm">chevron_right</span>
-            <span className="text-text-main font-medium truncate max-w-[200px] md:max-w-xs">{event.name}</span>
-          </div>
-          <h1 className="font-headline-lg text-[28px] font-semibold text-text-main">Dashboard Acara</h1>
-        </div>
-        <div className="flex gap-2">
-          <button className="bg-secondary text-on-secondary font-label-md text-[14px] font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
-            <span className="material-symbols-outlined text-sm">person_add</span>
-            Tambah Peserta
-          </button>
-          <Link href="/scanner" className="bg-surface-container-lowest text-secondary border border-secondary font-label-md text-[14px] font-semibold px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-2 shadow-sm">
-            <span className="material-symbols-outlined text-sm">qr_code_scanner</span>
-            Buka Scanner
-          </Link>
-        </div>
-      </div>
-
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Event Hero Card */}
