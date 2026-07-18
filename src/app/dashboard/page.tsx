@@ -45,8 +45,8 @@ export default async function DashboardPage() {
   // Recent Participants as "Audit Log" replacement
   const { data: recentParticipants } = await supabase
     .from('participants')
-    .select('id, full_name, created_at, events (name)')
-    .order('created_at', { ascending: false })
+    .select('id, full_name, registered_at, events (name)')
+    .order('registered_at', { ascending: false })
     .limit(4)
 
   const avgCheckinRate = totalRegistrations && totalRegistrations > 0 
@@ -60,9 +60,9 @@ export default async function DashboardPage() {
   // Chart data based on last 30 days
   const { data: recentRegs } = await supabase
     .from('participants')
-    .select('created_at')
+    .select('registered_at')
     // eslint-disable-next-line react-hooks/purity
-    .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+    .gte('registered_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
 
   const { data: recentAtts } = await supabase
     .from('attendances')
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
     const dayEnd = new Date(d)
     dayEnd.setDate(dayEnd.getDate() + 4)
     
-    const countReg = recentRegs?.filter(r => new Date(r.created_at) >= dayStart && new Date(r.created_at) < dayEnd).length || 0
+    const countReg = recentRegs?.filter(r => new Date(r.registered_at) >= dayStart && new Date(r.registered_at) < dayEnd).length || 0
     const countAtt = recentAtts?.filter(a => new Date(a.checked_in_at) >= dayStart && new Date(a.checked_in_at) < dayEnd).length || 0
     
     registrations.push(countReg)
