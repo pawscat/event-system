@@ -68,7 +68,7 @@ export function ParticipantForm({ initialData, participantId }: { initialData?: 
         if (insertError) throw insertError
       }
 
-      router.push('/dashboard/participants')
+      router.push('/dashboard/admin-event/participants')
       router.refresh()
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Terjadi kesalahan saat menyimpan data peserta.'
@@ -163,7 +163,7 @@ export function ParticipantForm({ initialData, participantId }: { initialData?: 
         </div>
 
         <div className="flex justify-end gap-3 pt-6">
-          <Link href="/dashboard/participants" className="px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md text-[14px] font-semibold hover:bg-surface-container-low transition-colors">
+          <Link href="/dashboard/admin-event/participants" className="px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md text-[14px] font-semibold hover:bg-surface-container-low transition-colors">
             Batal
           </Link>
           <button 

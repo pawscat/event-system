@@ -27,7 +27,7 @@ export default async function EventSummaryPage(props: { params: Promise<{ id: st
     .single()
 
   if (error || !event) {
-    redirect('/dashboard/events')
+    redirect('/dashboard/super-admin/events')
   }
 
   const isPublished = event.status === 'published'
@@ -39,7 +39,7 @@ export default async function EventSummaryPage(props: { params: Promise<{ id: st
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="text-body-sm text-[14px] text-text-muted mb-1 flex items-center gap-2">
-            <Link href="/dashboard/events" className="hover:text-secondary cursor-pointer">Acara</Link>
+            <Link href="/dashboard/super-admin/events" className="hover:text-secondary cursor-pointer">Acara</Link>
             <span className="material-symbols-outlined text-sm">chevron_right</span>
             <span className="text-text-main font-medium truncate max-w-[200px] md:max-w-xs">{event.name}</span>
           </div>
@@ -108,7 +108,7 @@ export default async function EventSummaryPage(props: { params: Promise<{ id: st
                 <span className="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">print</span>
                 <span className="font-label-sm text-[12px] font-medium text-text-main">Cetak ID Card</span>
               </button>
-              <Link href={`/dashboard/events/${event.id}/edit`} className="flex flex-col items-center justify-center p-4 border border-border-light rounded-lg hover:border-secondary hover:bg-surface-container-low transition-all group text-center">
+              <Link href={`/dashboard/super-admin/events/${event.id}/edit`} className="flex flex-col items-center justify-center p-4 border border-border-light rounded-lg hover:border-secondary hover:bg-surface-container-low transition-all group text-center">
                 <span className="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">settings</span>
                 <span className="font-label-sm text-[12px] font-medium text-text-main">Pengaturan Acara</span>
               </Link>

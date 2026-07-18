@@ -87,7 +87,7 @@ export function EventForm({ initialData, eventId }: { initialData?: Partial<Even
         if (insertError) throw insertError
       }
 
-      router.push('/dashboard/events')
+      router.push('/dashboard/super-admin/events')
       router.refresh()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -259,7 +259,7 @@ export function EventForm({ initialData, eventId }: { initialData?: Partial<Even
         </div>
 
         <div className="flex justify-end gap-3 pt-6">
-          <Link href="/dashboard/events" className="px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md hover:bg-surface-container-low transition-colors">
+          <Link href="/dashboard/super-admin/events" className="px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md hover:bg-surface-container-low transition-colors">
             Batal
           </Link>
           <button 

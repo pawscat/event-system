@@ -26,7 +26,7 @@ export default async function EditParticipantPage(props: { params: Promise<{ id:
     .single()
 
   if (error || !participant) {
-    redirect('/dashboard/participants')
+    redirect('/dashboard/admin-registrasi/participants')
   }
 
   return (
@@ -34,7 +34,7 @@ export default async function EditParticipantPage(props: { params: Promise<{ id:
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="text-body-sm text-[14px] text-text-muted mb-1 flex items-center gap-2">
-            <Link href="/dashboard/participants" className="hover:text-secondary cursor-pointer">Peserta</Link>
+            <Link href="/dashboard/admin-registrasi/participants" className="hover:text-secondary cursor-pointer">Peserta</Link>
             <span className="material-symbols-outlined text-sm">chevron_right</span>
             <span className="text-text-main font-medium max-w-[200px] truncate">{participant.name}</span>
             <span className="material-symbols-outlined text-sm">chevron_right</span>

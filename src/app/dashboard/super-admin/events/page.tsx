@@ -28,7 +28,7 @@ export default async function EventsPage() {
           <h1 className="font-headline-lg text-[28px] font-semibold text-text-main">Daftar Acara</h1>
           <p className="font-body-sm text-[14px] text-text-muted mt-1">Kelola seluruh kegiatan dan logistik acara Anda di satu tempat.</p>
         </div>
-        <Link href="/dashboard/events/new" className="bg-secondary text-on-secondary font-label-md text-[14px] font-semibold px-6 py-2.5 rounded-lg hover:bg-secondary-container transition-colors shadow-sm flex items-center gap-2">
+        <Link href="/dashboard/super-admin/events/new" className="bg-secondary text-on-secondary font-label-md text-[14px] font-semibold px-6 py-2.5 rounded-lg hover:bg-secondary-container transition-colors shadow-sm flex items-center gap-2">
           <span className="material-symbols-outlined text-[20px]">add</span>
           Tambah Event Baru
         </Link>
@@ -109,10 +109,10 @@ export default async function EventsPage() {
               
               {/* Hover Overlay Actions */}
               <div className="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                <Link href={`/dashboard/events/${event.id}/edit`} className="bg-surface-container-lowest text-text-main p-2 rounded-lg hover:text-secondary shadow-sm">
+                <Link href={`/dashboard/super-admin/events/${event.id}/edit`} className="bg-surface-container-lowest text-text-main p-2 rounded-lg hover:text-secondary shadow-sm">
                   <span className="material-symbols-outlined">edit</span>
                 </Link>
-                <Link href={`/dashboard/events/${event.id}`} className="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold shadow-sm">
+                <Link href={`/dashboard/super-admin/events/${event.id}`} className="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold shadow-sm">
                   Kelola Event
                 </Link>
               </div>

@@ -26,7 +26,7 @@ export default async function EditEventPage(props: { params: Promise<{ id: strin
     .single()
 
   if (error || !event) {
-    redirect('/dashboard/events')
+    redirect('/dashboard/super-admin/events')
   }
 
   return (
@@ -34,9 +34,9 @@ export default async function EditEventPage(props: { params: Promise<{ id: strin
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="text-body-sm text-[14px] text-text-muted mb-1 flex items-center gap-2">
-            <Link href="/dashboard/events" className="hover:text-secondary cursor-pointer">Acara</Link>
+            <Link href="/dashboard/super-admin/events" className="hover:text-secondary cursor-pointer">Acara</Link>
             <span className="material-symbols-outlined text-sm">chevron_right</span>
-            <Link href={`/dashboard/events/${event.id}`} className="hover:text-secondary cursor-pointer max-w-[150px] truncate">{event.name}</Link>
+            <Link href={`/dashboard/super-admin/events/${event.id}`} className="hover:text-secondary cursor-pointer max-w-[150px] truncate">{event.name}</Link>
             <span className="material-symbols-outlined text-sm">chevron_right</span>
             <span className="text-text-main font-medium">Edit</span>
           </div>

@@ -73,11 +73,11 @@ export default async function ParticipantsPage(props: { searchParams: Promise<{ 
             <span className="material-symbols-outlined text-sm">download</span>
             Ekspor
           </a>
-          <Link href="/dashboard/participants/import" className="px-4 py-2 border border-border-light bg-surface-container-lowest text-text-main font-label-md text-[14px] font-semibold rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-2">
+          <Link href="/dashboard/admin-event/participants/import" className="px-4 py-2 border border-border-light bg-surface-container-lowest text-text-main font-label-md text-[14px] font-semibold rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-2">
             <span className="material-symbols-outlined text-sm">upload_file</span>
             Import
           </Link>
-          <Link href="/dashboard/participants/new" className="px-4 py-2 bg-secondary text-on-secondary font-label-md text-[14px] font-semibold rounded-lg hover:bg-secondary/90 transition-colors shadow-sm flex items-center gap-2">
+          <Link href="/dashboard/admin-event/participants/new" className="px-4 py-2 bg-secondary text-on-secondary font-label-md text-[14px] font-semibold rounded-lg hover:bg-secondary/90 transition-colors shadow-sm flex items-center gap-2">
             <span className="material-symbols-outlined text-sm">add</span>
             Tambah Peserta
           </Link>
@@ -162,7 +162,7 @@ export default async function ParticipantsPage(props: { searchParams: Promise<{ 
                         <button className="p-1.5 text-text-muted hover:text-secondary hover:bg-secondary/10 rounded transition-colors" title="Kirim Ulang">
                           <span className="material-symbols-outlined text-[18px]">send</span>
                         </button>
-                        <Link href={`/dashboard/participants/${participant.id}/edit`} className="p-1.5 text-text-muted hover:text-primary hover:bg-primary/10 rounded transition-colors" title="Edit">
+                        <Link href={`/dashboard/admin-event/participants/${participant.id}/edit`} className="p-1.5 text-text-muted hover:text-primary hover:bg-primary/10 rounded transition-colors" title="Edit">
                           <span className="material-symbols-outlined text-[18px]">edit</span>
                         </Link>
                       </div>

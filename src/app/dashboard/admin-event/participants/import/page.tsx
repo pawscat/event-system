@@ -76,7 +76,7 @@ export default function ImportParticipantsPage() {
             Unduh Template Excel
           </a>
           <div className="flex gap-2">
-            <Link href="/dashboard/participants" className="px-4 py-2 border border-border-light rounded-lg text-text-main font-semibold hover:bg-surface-container-low transition-colors">
+            <Link href="/dashboard/admin-event/participants" className="px-4 py-2 border border-border-light rounded-lg text-text-main font-semibold hover:bg-surface-container-low transition-colors">
               Batal
             </Link>
             <button 
