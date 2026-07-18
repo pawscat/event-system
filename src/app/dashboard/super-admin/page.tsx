@@ -100,11 +100,11 @@ export default async function DashboardPage() {
           <p className="font-body-sm text-[14px] text-text-muted mt-1">Ringkasan performa sistem dan logistik acara terkini.</p>
         </div>
         <div className="flex gap-3">
-          <Link href="/dashboard/admins/new" className="flex items-center gap-2 bg-surface text-secondary border border-secondary hover:bg-surface-container-low px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold transition-colors">
+          <Link href="/dashboard/super-admin/users/new" className="flex items-center gap-2 bg-surface text-secondary border border-secondary hover:bg-surface-container-low px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold transition-colors">
             <span className="material-symbols-outlined text-[20px]">person_add</span>
             Buat Akun Admin
           </Link>
-          <Link href="/dashboard/events/new" className="flex items-center gap-2 bg-primary text-on-primary hover:bg-primary/90 px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold shadow-sm transition-colors">
+          <Link href="/dashboard/super-admin/events/new" className="flex items-center gap-2 bg-primary text-on-primary hover:bg-primary/90 px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold shadow-sm transition-colors">
             <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>add_circle</span>
             Buat Event Baru
           </Link>
@@ -205,9 +205,9 @@ export default async function DashboardPage() {
               <div className="text-text-muted text-sm text-center py-4">Belum ada pendaftar</div>
             )}
           </div>
-          <Link href="/dashboard/participants" className="block text-center w-full mt-4 py-2 font-label-md text-[14px] font-semibold text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+          {/* <Link href="/dashboard/participants" className="block text-center w-full mt-4 py-2 font-label-md text-[14px] font-semibold text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
             Lihat Semua Peserta
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -215,7 +215,7 @@ export default async function DashboardPage() {
       <div className="bg-surface rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] overflow-hidden">
         <div className="p-6 border-b border-border-light flex justify-between items-center">
           <h3 className="font-headline-sm text-[20px] font-semibold text-text-main">Performa Event Aktif</h3>
-          <Link href="/dashboard/events" className="font-label-md text-[14px] font-semibold text-text-muted hover:text-text-main flex items-center gap-1">
+          <Link href="/dashboard/super-admin/events" className="font-label-md text-[14px] font-semibold text-text-muted hover:text-text-main flex items-center gap-1">
             <span className="material-symbols-outlined text-[18px]">list</span> Semua
           </Link>
         </div>

@@ -14,7 +14,7 @@ type ParticipantData = {
   job_title: string
 }
 
-export function ParticipantForm({ initialData, participantId }: { initialData?: Partial<ParticipantData>, participantId?: string }) {
+export function ParticipantForm({ initialData, participantId, eventId }: { initialData?: Partial<ParticipantData>, participantId?: string, eventId: string }) {
   const router = useRouter()
   const supabase = createClient()
   const [loading, setLoading] = useState(false)
@@ -163,7 +163,7 @@ export function ParticipantForm({ initialData, participantId }: { initialData?: 
         </div>
 
         <div className="flex justify-end gap-3 pt-6">
-          <Link href="/dashboard/admin-registrasi/participants" className="px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md text-[14px] font-semibold hover:bg-surface-container-low transition-colors">
+          <Link href={`/dashboard/admin-registrasi/events/${eventId}/participants`} className="px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md text-[14px] font-semibold hover:bg-surface-container-low transition-colors">
             Batal
           </Link>
           <button 
