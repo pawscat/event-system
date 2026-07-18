@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { DashboardTrendChart } from '../dashboard-trend-chart'
+import { DashboardTrendChart } from '@/components/dashboard/dashboard-trend-chart'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 

@@ -10,6 +10,7 @@ export type StaffRole = 'event_admin' | 'registration_admin' | 'scanner_admin'
 export interface EventAssignment {
   event_id: string
   role: StaffRole
+  status: 'active' | 'inactive'
   events: {
     id: string
     name: string
@@ -71,9 +72,11 @@ export async function getUserAuthData(): Promise<UserAuthData | null> {
     .select(`
       event_id,
       role,
+      status,
       events (id, name, slug)
     `)
     .eq('user_id', userData.id)
+    .eq('status', 'active')
 
   return {
     id: userData.id,

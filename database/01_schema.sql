@@ -12,6 +12,7 @@ CREATE TYPE checkin_method AS ENUM ('qr', 'manual');
 CREATE TYPE email_status AS ENUM ('queued', 'sending', 'sent', 'delivered', 'failed', 'bounced', 'skipped');
 CREATE TYPE broadcast_status AS ENUM ('draft', 'scheduled', 'sending', 'completed', 'partially_failed', 'cancelled');
 CREATE TYPE job_status AS ENUM ('pending', 'processing', 'completed', 'failed');
+CREATE TYPE assignment_status AS ENUM ('active', 'inactive');
 
 -- TABLES
 
@@ -50,11 +51,15 @@ CREATE TABLE event_staff_assignments (
     event_id UUID NOT NULL REFERENCES events(id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     role staff_role NOT NULL,
+    status assignment_status NOT NULL DEFAULT 'active',
     manual_checkin_allowed BOOLEAN DEFAULT FALSE,
     assigned_by UUID REFERENCES users(id),
-    assigned_at TIMESTAMPTZ DEFAULT NOW(),
-    UNIQUE(event_id, user_id)
+    assigned_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+CREATE UNIQUE INDEX unique_active_assignment_per_user 
+ON event_staff_assignments(user_id) 
+WHERE status = 'active';
 
 CREATE TABLE participants (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

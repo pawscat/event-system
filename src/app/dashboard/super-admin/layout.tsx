@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getUserAuthData } from '@/lib/actions/auth-actions'
-import { DashboardClientShell } from '../dashboard-client-shell'
+import { DashboardClientShell } from '@/components/dashboard/dashboard-shell'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 

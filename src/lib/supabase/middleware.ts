@@ -31,11 +31,26 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const isPublicRoute = request.nextUrl.pathname.startsWith('/register') || request.nextUrl.pathname.startsWith('/public')
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/forgot-password')
+  const path = request.nextUrl.pathname
+
+  // Define route categories based on instructions
+  const isPublicRoute = 
+    path === '/' || 
+    path.startsWith('/register') || 
+    path.startsWith('/ticket') || 
+    path === '/privacy-policy'
+
+  const isAuthRoute = 
+    path.startsWith('/login') || 
+    path.startsWith('/forgot-password') ||
+    path.startsWith('/reset-password')
+
+  // Enforce auth on protected routes
+  // The only protected routes by default are those that are NOT public and NOT auth
+  // Specifically: /dashboard and /api (if it requires auth, though API might handle it itself)
   
   if (!user && !isPublicRoute && !isAuthRoute) {
-    // no user, potentially respond by redirecting the user to the login page
+    // If not logged in and trying to access a private route like /dashboard
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
