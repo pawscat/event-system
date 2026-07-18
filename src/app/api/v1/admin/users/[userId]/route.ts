@@ -33,14 +33,14 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ u
       return NextResponse.json({ error: 'User not found in database' }, { status: 404 })
     }
 
-    // Delete user from Supabase Auth
-    // Because of ON DELETE CASCADE, this might automatically delete the public.users record
-    // depending on how the foreign key is set up. We'll explicitly delete both just in case.
-    const { error: authError } = await supabaseAdmin.auth.admin.deleteUser(userRecord.auth_provider_id)
-    
-    if (authError) {
-      console.error('Failed to delete auth user:', authError)
-      // Sometimes auth user is already gone, so we still proceed to delete public record
+    // Delete user from Supabase Auth if they have an auth_provider_id
+    if (userRecord.auth_provider_id) {
+      const { error: authError } = await supabaseAdmin.auth.admin.deleteUser(userRecord.auth_provider_id)
+      
+      if (authError) {
+        console.error('Failed to delete auth user:', authError)
+        // Proceed to delete public record anyway
+      }
     }
 
     // Delete from public.users
@@ -57,6 +57,6 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ u
     return NextResponse.json({ success: true })
   } catch (err: any) {
     console.error('DELETE User Error:', err)
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 })
   }
 }
