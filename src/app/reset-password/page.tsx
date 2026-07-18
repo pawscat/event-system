@@ -15,20 +15,36 @@ export default function ResetPasswordPage() {
   const supabase = createClient()
 
   useEffect(() => {
-    // Check if the user is coming from an email recovery link
-    // Supabase will automatically handle the #access_token fragment and set the session
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (!session) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        setStatus(null)
+      } else {
         setStatus({
           type: 'error',
           message: 'Sesi tidak valid atau telah kedaluwarsa. Silakan minta tautan pemulihan baru.'
         })
       }
       setIsReady(true)
+    })
+
+    // Initial check (in case onAuthStateChange doesn't fire immediately for already logged in)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setStatus(null)
+        setIsReady(true)
+      } else if (typeof window !== 'undefined' && !window.location.hash.includes('access_token')) {
+        // If no session and no token in URL, it's definitely invalid
+        setStatus({
+          type: 'error',
+          message: 'Sesi tidak valid atau telah kedaluwarsa. Silakan minta tautan pemulihan baru.'
+        })
+        setIsReady(true)
+      }
+    })
+
+    return () => {
+      subscription.unsubscribe()
     }
-    
-    checkSession()
   }, [supabase])
 
   const handleUpdatePassword = async (e: React.FormEvent) => {
