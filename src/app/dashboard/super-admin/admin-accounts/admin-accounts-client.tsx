@@ -165,6 +165,30 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
     }
   }
 
+  const handleDeleteUser = async (user: User) => {
+    if (user.id === currentUserId) return
+
+    if (!confirm(`PERINGATAN: Apakah Anda yakin ingin MENGHAPUS PERMANEN akun ${user.full_name}? Aksi ini tidak dapat dibatalkan.`)) return
+    
+    setIsSubmitting(true)
+    try {
+      const res = await fetch(`/api/v1/admin/users/${user.id}`, {
+        method: 'DELETE'
+      })
+      
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Gagal menghapus akun.')
+      }
+
+      setUsers(prev => prev.filter(u => u.id !== user.id))
+    } catch (err: any) {
+      alert(err?.message || 'Terjadi kesalahan sistem saat menghapus akun.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const formatRole = (globalRole: string, assignment: Assignment | null) => {
     if (globalRole === 'super_admin') return 'Super Admin'
     if (!assignment) return 'Admin (Belum Bertugas)'
@@ -244,18 +268,29 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
                       <span className="material-symbols-outlined text-[20px]">edit</span>
                     </button>
 
-                    {user.id !== currentUserId && (
-                      <button
-                        className="p-1.5 text-text-muted hover:text-error rounded hover:bg-surface-container-high transition-colors"
-                        title={user.status === 'active' ? 'Nonaktifkan Akun' : 'Aktifkan Akun'}
-                        onClick={() => handleToggleStatus(user)}
-                        disabled={isSubmitting}
-                      >
-                        <span className="material-symbols-outlined text-[20px]">{user.status === 'active' ? 'block' : 'check_circle'}</span>
-                      </button>
-                    )}
+                      {user.id !== currentUserId && (
+                        <button
+                          className="p-1.5 text-text-muted hover:text-error rounded hover:bg-surface-container-high transition-colors"
+                          title={user.status === 'active' ? 'Nonaktifkan Akun' : 'Aktifkan Akun'}
+                          onClick={() => handleToggleStatus(user)}
+                          disabled={isSubmitting}
+                        >
+                          <span className="material-symbols-outlined text-[20px]">{user.status === 'active' ? 'block' : 'check_circle'}</span>
+                        </button>
+                      )}
 
-                    {user.global_role !== 'super_admin' && (
+                      {user.id !== currentUserId && (
+                        <button
+                          className="p-1.5 text-text-muted hover:text-error rounded hover:bg-surface-container-high transition-colors"
+                          title="Hapus Akun Permanen"
+                          onClick={() => handleDeleteUser(user)}
+                          disabled={isSubmitting}
+                        >
+                          <span className="material-symbols-outlined text-[20px]">delete</span>
+                        </button>
+                      )}
+
+                      {user.global_role !== 'super_admin' && (
                       <>
                         <button 
                           onClick={() => handleOpenAssign(user)}
