@@ -31,11 +31,17 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
   const [users, setUsers] = useState<User[]>(initialUsers)
   const [search, setSearch] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   
   // Reassignment states
   const [newRole, setNewRole] = useState('')
   const [newEventId, setNewEventId] = useState('')
+
+  // Edit Profile states
+  const [editFullName, setEditFullName] = useState('')
+  const [editGlobalRole, setEditGlobalRole] = useState('')
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -165,6 +171,48 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
     }
   }
 
+  const handleOpenEdit = (user: User) => {
+    setSelectedUser(user)
+    setEditFullName(user.full_name)
+    setEditGlobalRole(user.global_role)
+    setErrorMsg('')
+    setIsEditModalOpen(true)
+  }
+
+  const handleEditUser = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!selectedUser) return
+    if (!editFullName || !editGlobalRole) {
+      setErrorMsg('Harap lengkapi semua field yang wajib.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setErrorMsg('')
+
+    try {
+      const res = await fetch(`/api/v1/admin/users/${selectedUser.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ full_name: editFullName, role: editGlobalRole })
+      })
+      
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Gagal menyimpan perubahan.')
+      }
+
+      setUsers(prev => prev.map(u => 
+        u.id === selectedUser.id ? { ...u, full_name: editFullName, global_role: editGlobalRole } : u
+      ))
+      setIsEditModalOpen(false)
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Terjadi kesalahan sistem saat menyimpan perubahan.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const handleDeleteUser = async (user: User) => {
     if (user.id === currentUserId) return
 
@@ -262,8 +310,8 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
                   <div className="flex justify-end gap-2">
                     <button
                       className="p-1.5 text-text-muted hover:text-primary rounded hover:bg-surface-container-high transition-colors"
-                      title="Edit Profil Admin (Dalam Pengembangan)"
-                      onClick={() => alert('Fitur edit profil masih dalam pengembangan.')}
+                      title="Edit Profil Admin"
+                      onClick={() => handleOpenEdit(user)}
                     >
                       <span className="material-symbols-outlined text-[20px]">edit</span>
                     </button>
@@ -380,6 +428,80 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
               >
                 {isSubmitting ? 'Menyimpan...' : 'Simpan Penugasan'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Profile Modal */}
+      {isEditModalOpen && selectedUser && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-surface w-full max-w-md rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-border-light flex justify-between items-center">
+              <div>
+                <h3 className="text-title-lg font-bold text-text-main">Edit Profil Admin</h3>
+                <p className="text-body-sm text-text-muted mt-1">{selectedUser.email}</p>
+              </div>
+              <button 
+                onClick={() => setIsEditModalOpen(false)}
+                className="text-text-muted hover:text-text-main p-1 rounded-full hover:bg-surface-container-high transition-colors"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div className="p-6">
+              {errorMsg && (
+                <div className="mb-4 p-3 bg-error/10 text-error text-[13px] font-medium rounded-lg flex items-start gap-2">
+                  <span className="material-symbols-outlined text-[18px]">error</span>
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+              
+              <form onSubmit={handleEditUser} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-label-sm font-semibold text-text-main">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    required
+                    value={editFullName}
+                    onChange={e => setEditFullName(e.target.value)}
+                    className="w-full px-3 py-2 bg-surface border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-md"
+                    placeholder="Masukkan nama lengkap"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-label-sm font-semibold text-text-main">Role Global</label>
+                  <select
+                    value={editGlobalRole}
+                    onChange={e => setEditGlobalRole(e.target.value)}
+                    className="w-full px-3 py-2 bg-surface border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-md"
+                  >
+                    <option value="admin">Admin (Staff)</option>
+                    <option value="super_admin">Super Admin</option>
+                  </select>
+                  <p className="text-[11px] text-text-muted mt-1">Super Admin memiliki akses penuh ke semua event dan fitur sistem.</p>
+                </div>
+
+                <div className="pt-4 flex justify-end gap-3 border-t border-border-light mt-6">
+                  <button
+                    type="button"
+                    onClick={() => setIsEditModalOpen(false)}
+                    className="px-4 py-2 font-semibold text-text-main bg-surface hover:bg-surface-container-high border border-border-light rounded-lg transition-colors text-[14px]"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-4 py-2 font-semibold text-on-primary bg-primary hover:bg-primary/90 rounded-lg transition-colors text-[14px] flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <span className="w-5 h-5 border-2 border-on-primary/30 border-t-on-primary rounded-full animate-spin"></span>
+                    ) : 'Simpan Perubahan'}
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

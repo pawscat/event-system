@@ -60,3 +60,72 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ u
     return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 })
   }
 }
+
+export async function PUT(request: Request, { params }: { params: Promise<{ userId: string }> }) {
+  try {
+    const authData = await getUserAuthData()
+    if (!authData || authData.role !== 'super_admin') {
+      return NextResponse.json({ error: 'Forbidden. Only Super Admin can edit global users.' }, { status: 403 })
+    }
+
+    const { userId } = await params
+    const { full_name, role } = await request.json()
+
+    if (!userId || !full_name || !role) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    }
+
+    if (!['admin', 'super_admin'].includes(role)) {
+      return NextResponse.json({ error: 'Invalid role' }, { status: 400 })
+    }
+
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+
+    // First fetch the user's auth_provider_id
+    const { data: userRecord, error: userError } = await supabaseAdmin
+      .from('users')
+      .select('auth_provider_id')
+      .eq('id', userId)
+      .single()
+
+    if (userError || !userRecord) {
+      return NextResponse.json({ error: 'User not found in database' }, { status: 404 })
+    }
+
+    // 1. Update public.users
+    const { error: dbError } = await supabaseAdmin
+      .from('users')
+      .update({ full_name, role })
+      .eq('id', userId)
+
+    if (dbError) {
+      console.error('Failed to update public user:', dbError)
+      return NextResponse.json({ error: 'Failed to update user record in database' }, { status: 500 })
+    }
+
+    // 2. Update auth.users (user_metadata)
+    if (userRecord.auth_provider_id) {
+      const authUpdates = {
+        user_metadata: { full_name }
+      }
+      
+      const { error: authError } = await supabaseAdmin.auth.admin.updateUserById(
+        userRecord.auth_provider_id,
+        authUpdates
+      )
+      
+      if (authError) {
+        console.error('Failed to update auth user metadata:', authError)
+        // We still return success if db update worked
+      }
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (err: any) {
+    console.error('PUT User Error:', err)
+    return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 })
+  }
+}
