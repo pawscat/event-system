@@ -41,6 +41,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
   // Edit Profile states
   const [editFullName, setEditFullName] = useState('')
   const [editEmail, setEditEmail] = useState('')
+  const [editPassword, setEditPassword] = useState('')
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -175,6 +176,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
     setSelectedUser(user)
     setEditFullName(user.full_name)
     setEditEmail(user.email)
+    setEditPassword('')
     setErrorMsg('')
     setIsEditModalOpen(true)
   }
@@ -194,7 +196,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
       const res = await fetch(`/api/v1/admin/users/${selectedUser.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name: editFullName, email: editEmail })
+        body: JSON.stringify({ full_name: editFullName, email: editEmail, password: editPassword })
       })
       
       if (!res.ok) {
@@ -481,6 +483,18 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
                     placeholder="Masukkan alamat email"
                   />
                   <p className="text-[11px] text-text-muted mt-1">Hati-hati: mengubah email akan mengubah kredensial login admin ini.</p>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-label-sm font-semibold text-text-main">Ganti Password <span className="font-normal text-text-muted">(Opsional)</span></label>
+                  <input
+                    type="password"
+                    value={editPassword}
+                    onChange={e => setEditPassword(e.target.value)}
+                    className="w-full px-3 py-2 bg-surface border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-md"
+                    placeholder="Kosongkan jika tidak ingin diubah"
+                  />
+                  <p className="text-[11px] text-text-muted mt-1">Minimal 6 karakter jika ingin mengganti password baru.</p>
                 </div>
 
                 <div className="pt-4 flex justify-end gap-3 border-t border-border-light mt-6">
