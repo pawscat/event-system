@@ -109,11 +109,11 @@ export default async function EventsPage() {
               
               {/* Hover Overlay Actions */}
               <div className="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                <Link href={`/dashboard/super-admin/events/${event.id}/edit`} className="bg-surface-container-lowest text-text-main p-2 rounded-lg hover:text-secondary shadow-sm">
-                  <span className="material-symbols-outlined">edit</span>
+                <Link href={`/dashboard/super-admin/events/${event.id}/settings`} className="bg-surface-container-lowest text-text-main p-2 rounded-lg hover:text-secondary shadow-sm">
+                  <span className="material-symbols-outlined text-[20px]">settings</span>
                 </Link>
-                <Link href={`/dashboard/super-admin/events/${event.id}`} className="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold shadow-sm">
-                  Kelola Event
+                <Link href={`/dashboard/super-admin/events/${event.id}/overview`} className="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-[14px] font-semibold shadow-sm">
+                  Lihat Detail
                 </Link>
               </div>
             </div>
