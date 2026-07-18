@@ -69,15 +69,13 @@ export async function PUT(request: Request, { params }: { params: Promise<{ user
     }
 
     const { userId } = await params
-    const { full_name, role } = await request.json()
+    const { full_name, email } = await request.json()
 
-    if (!userId || !full_name || !role) {
+    if (!userId || !full_name || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    if (!['admin', 'super_admin'].includes(role)) {
-      return NextResponse.json({ error: 'Invalid role' }, { status: 400 })
-    }
+
 
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -98,7 +96,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ user
     // 1. Update public.users
     const { error: dbError } = await supabaseAdmin
       .from('users')
-      .update({ full_name, role })
+      .update({ full_name, email })
       .eq('id', userId)
 
     if (dbError) {
@@ -106,9 +104,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ user
       return NextResponse.json({ error: 'Failed to update user record in database' }, { status: 500 })
     }
 
-    // 2. Update auth.users (user_metadata)
+    // 2. Update auth.users (user_metadata and email)
     if (userRecord.auth_provider_id) {
       const authUpdates = {
+        email: email,
         user_metadata: { full_name }
       }
       

@@ -40,7 +40,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
 
   // Edit Profile states
   const [editFullName, setEditFullName] = useState('')
-  const [editGlobalRole, setEditGlobalRole] = useState('')
+  const [editEmail, setEditEmail] = useState('')
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -174,7 +174,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
   const handleOpenEdit = (user: User) => {
     setSelectedUser(user)
     setEditFullName(user.full_name)
-    setEditGlobalRole(user.global_role)
+    setEditEmail(user.email)
     setErrorMsg('')
     setIsEditModalOpen(true)
   }
@@ -182,7 +182,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
   const handleEditUser = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!selectedUser) return
-    if (!editFullName || !editGlobalRole) {
+    if (!editFullName || !editEmail) {
       setErrorMsg('Harap lengkapi semua field yang wajib.')
       return
     }
@@ -194,7 +194,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
       const res = await fetch(`/api/v1/admin/users/${selectedUser.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name: editFullName, role: editGlobalRole })
+        body: JSON.stringify({ full_name: editFullName, email: editEmail })
       })
       
       if (!res.ok) {
@@ -203,7 +203,7 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
       }
 
       setUsers(prev => prev.map(u => 
-        u.id === selectedUser.id ? { ...u, full_name: editFullName, global_role: editGlobalRole } : u
+        u.id === selectedUser.id ? { ...u, full_name: editFullName, email: editEmail } : u
       ))
       setIsEditModalOpen(false)
     } catch (err: any) {
@@ -471,16 +471,16 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-label-sm font-semibold text-text-main">Role Global</label>
-                  <select
-                    value={editGlobalRole}
-                    onChange={e => setEditGlobalRole(e.target.value)}
+                  <label className="text-label-sm font-semibold text-text-main">Alamat Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={editEmail}
+                    onChange={e => setEditEmail(e.target.value)}
                     className="w-full px-3 py-2 bg-surface border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-md"
-                  >
-                    <option value="admin">Admin (Staff)</option>
-                    <option value="super_admin">Super Admin</option>
-                  </select>
-                  <p className="text-[11px] text-text-muted mt-1">Super Admin memiliki akses penuh ke semua event dan fitur sistem.</p>
+                    placeholder="Masukkan alamat email"
+                  />
+                  <p className="text-[11px] text-text-muted mt-1">Hati-hati: mengubah email akan mengubah kredensial login admin ini.</p>
                 </div>
 
                 <div className="pt-4 flex justify-end gap-3 border-t border-border-light mt-6">
