@@ -15,6 +15,7 @@ export function SidebarNav({ dashboardType }: { dashboardType: DashboardType }) 
     links = [
       { href: '/dashboard/super-admin', label: 'Ringkasan Global', icon: 'monitoring' },
       { href: '/dashboard/super-admin/events', label: 'Semua Acara', icon: 'event' },
+      { href: '/dashboard/super-admin/participants', label: 'Peserta Global', icon: 'groups' },
       { href: '/dashboard/super-admin/users', label: 'Admin & Staf', icon: 'manage_accounts' },
       { href: '/dashboard/super-admin/reports', label: 'Laporan Global', icon: 'assessment' },
     ]

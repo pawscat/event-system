@@ -205,9 +205,9 @@ export default async function DashboardPage() {
               <div className="text-text-muted text-sm text-center py-4">Belum ada pendaftar</div>
             )}
           </div>
-          {/* <Link href="/dashboard/participants" className="block text-center w-full mt-4 py-2 font-label-md text-[14px] font-semibold text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+          <Link href="/dashboard/super-admin/participants" className="block text-center w-full mt-4 py-2 font-label-md text-[14px] font-semibold text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
             Lihat Semua Peserta
-          </Link> */}
+          </Link>
         </div>
       </div>
 
