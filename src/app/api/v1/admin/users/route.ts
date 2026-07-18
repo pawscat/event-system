@@ -1,8 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
+import { getUserAuthData } from '@/lib/actions/auth-actions'
 
 export async function POST(request: Request) {
   try {
+    const authData = await getUserAuthData()
+    if (!authData || authData.role !== 'super_admin') {
+      return NextResponse.json({ error: 'Forbidden. Only Super Admin can manage global users.' }, { status: 403 })
+    }
+
     const { email, password, full_name, role } = await request.json()
 
     if (!email || !password || !full_name) {
@@ -21,7 +27,7 @@ export async function POST(request: Request) {
 
     // 1. Create User in Supabase Auth
     // Use email_confirm: true so they can login immediately
-    const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
+    const { data: newAuthData, error: authError } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
       email_confirm: true,
@@ -33,7 +39,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: authError.message }, { status: 400 })
     }
 
-    if (!authData.user) {
+    if (!newAuthData.user) {
       return NextResponse.json({ error: 'Failed to create user' }, { status: 500 })
     }
 
@@ -41,7 +47,7 @@ export async function POST(request: Request) {
     const { error: dbError } = await supabaseAdmin
       .from('users')
       .insert({
-        auth_provider_id: authData.user.id,
+        auth_provider_id: newAuthData.user.id,
         email,
         full_name,
         role,
@@ -51,7 +57,7 @@ export async function POST(request: Request) {
     if (dbError) {
       console.error('DB Error:', dbError)
       // Cleanup the auth user if DB insert fails
-      await supabaseAdmin.auth.admin.deleteUser(authData.user.id)
+      await supabaseAdmin.auth.admin.deleteUser(newAuthData.user.id)
       return NextResponse.json({ error: 'Failed to save user profile' }, { status: 500 })
     }
 
@@ -66,6 +72,11 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
+    const authData = await getUserAuthData()
+    if (!authData || authData.role !== 'super_admin') {
+      return NextResponse.json({ error: 'Forbidden. Only Super Admin can manage global users.' }, { status: 403 })
+    }
+
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
