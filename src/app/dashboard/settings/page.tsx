@@ -1,3 +1,5 @@
+import { PasswordForm } from './password-form'
+
 export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl">
@@ -32,16 +34,8 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Profil Akun (Dummy) */}
-        <div className="bg-surface-container-lowest p-6 rounded-xl border border-border-light shadow-sm opacity-60">
-          <h2 className="text-title-md font-semibold text-text-main mb-4 flex items-center gap-2">
-            <span className="material-symbols-outlined text-text-muted">person</span>
-            Profil Akun (Segera Hadir)
-          </h2>
-          <p className="text-body-md text-text-muted">
-            Fitur pembaruan kata sandi dan manajemen profil sedang dalam tahap pengembangan.
-          </p>
-        </div>
+        {/* Profil Akun */}
+        <PasswordForm />
       </div>
     </div>
   )

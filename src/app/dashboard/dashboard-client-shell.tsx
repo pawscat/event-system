@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { SidebarNav } from './sidebar-nav'
+import { UserNav } from './user-nav'
 
 export function DashboardClientShell({
   children,
@@ -69,9 +70,7 @@ export function DashboardClientShell({
             <span className="material-symbols-outlined">notifications</span>
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full"></span>
           </button>
-          <div className="h-8 w-8 rounded-full overflow-hidden border border-border-light ml-1 sm:ml-2 bg-primary-fixed flex items-center justify-center text-primary font-bold text-sm shrink-0">
-            {userName.charAt(0).toUpperCase()}
-          </div>
+          <UserNav userName={userName} />
         </div>
       </header>
 
