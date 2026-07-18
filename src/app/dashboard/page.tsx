@@ -31,15 +31,15 @@ export default async function DashboardPage() {
       id,
       name,
       slug,
-      location_name,
-      start_time,
+      venue,
+      start_at,
       status,
       banner_image_url,
       participants (count),
       attendances (count)
     `)
     .eq('status', 'published')
-    .order('start_time', { ascending: true })
+    .order('start_at', { ascending: true })
     .limit(5)
 
   // Recent Participants as "Audit Log" replacement
@@ -197,7 +197,7 @@ export default async function DashboardPage() {
                   </div>
                   <div>
                     <p className="font-body-sm text-[14px] text-text-main"><span className="font-semibold">{p.full_name}</span> mendaftar di {eventName}</p>
-                    <span className="font-label-sm text-[12px] text-text-muted">{new Date(p.created_at).toLocaleString('id-ID')}</span>
+                    <span className="font-label-sm text-[12px] text-text-muted">{new Date(p.registered_at).toLocaleString('id-ID')}</span>
                   </div>
                 </div>
               )
