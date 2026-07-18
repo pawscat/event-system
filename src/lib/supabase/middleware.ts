@@ -32,7 +32,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const isPublicRoute = request.nextUrl.pathname.startsWith('/register') || request.nextUrl.pathname.startsWith('/public')
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/forgot-password')
+  const isAuthRoute = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/forgot-password') || request.nextUrl.pathname.startsWith('/reset-password')
   
   if (!user && !isPublicRoute && !isAuthRoute) {
     // no user, potentially respond by redirecting the user to the login page
