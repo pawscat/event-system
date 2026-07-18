@@ -19,15 +19,15 @@ async function run() {
       id,
       name,
       slug,
-      location_name,
-      start_time,
+      venue,
+      start_at,
       status,
       banner_image_url,
       participants (count),
       attendances (count)
     `)
     .eq('status', 'published')
-    .order('start_time', { ascending: true })
+    .order('start_at', { ascending: true })
     .limit(5);
   console.log('Error:', error);
   console.log('Data:', JSON.stringify(data, null, 2));

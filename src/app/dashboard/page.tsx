@@ -34,7 +34,6 @@ export default async function DashboardPage() {
       venue,
       start_at,
       status,
-      banner_image_url,
       participants (count),
       attendances (count)
     `)
