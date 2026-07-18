@@ -1,10 +1,10 @@
 -- Seed Users
 -- For testing, we mock auth_provider_id with UUIDs. In real app, these come from Supabase Auth.
 INSERT INTO users (id, full_name, email, role, auth_provider_id) VALUES
-  ('00000000-0000-0000-0000-000000000001', 'Super Admin', 'super@eventflow.id', 'super_admin', 'a0000000-0000-0000-0000-000000000001'),
-  ('00000000-0000-0000-0000-000000000002', 'Admin Event', 'adminevent@eventflow.id', 'admin', 'a0000000-0000-0000-0000-000000000002'),
-  ('00000000-0000-0000-0000-000000000003', 'Admin Registrasi', 'adminreg@eventflow.id', 'admin', 'a0000000-0000-0000-0000-000000000003'),
-  ('00000000-0000-0000-0000-000000000004', 'Admin Scanner', 'adminscan@eventflow.id', 'admin', 'a0000000-0000-0000-0000-000000000004');
+  ('00000000-0000-0000-0000-000000000001', 'Super Admin', 'super@eventku.id', 'super_admin', 'a0000000-0000-0000-0000-000000000001'),
+  ('00000000-0000-0000-0000-000000000002', 'Admin Event', 'adminevent@eventku.id', 'admin', 'a0000000-0000-0000-0000-000000000002'),
+  ('00000000-0000-0000-0000-000000000003', 'Admin Registrasi', 'adminreg@eventku.id', 'admin', 'a0000000-0000-0000-0000-000000000003'),
+  ('00000000-0000-0000-0000-000000000004', 'Admin Scanner', 'adminscan@eventku.id', 'admin', 'a0000000-0000-0000-0000-000000000004');
 
 -- Seed Event
 INSERT INTO events (id, slug, name, description, start_at, end_at, venue, capacity, status, created_by) VALUES

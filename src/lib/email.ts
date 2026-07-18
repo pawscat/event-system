@@ -30,7 +30,7 @@ export async function sendEmail({
 
   try {
     const info = await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"EventFlow System" <noreply@eventflow.id>',
+      from: process.env.SMTP_FROM || '"Event Ku System" <noreply@eventku.id>',
       to,
       subject,
       html

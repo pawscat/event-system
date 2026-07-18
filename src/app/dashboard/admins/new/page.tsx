@@ -100,7 +100,7 @@ export default function CreateAdminPage() {
               value={formData.email}
               onChange={e => setFormData({...formData, email: e.target.value})}
               className="w-full px-4 py-2.5 rounded-lg border border-border-light focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-md"
-              placeholder="admin@eventflow.id"
+              placeholder="admin@eventku.id"
             />
           </div>
 

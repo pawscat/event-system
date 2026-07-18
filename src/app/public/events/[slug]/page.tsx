@@ -62,7 +62,7 @@ export default async function PublicEventPage(props: { params: Promise<{ slug: s
         <div className="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-primary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>event</span>
-            <span className="font-headline-sm text-primary tracking-tight">EventFlow</span>
+            <span className="font-headline-sm text-primary tracking-tight">Event Ku</span>
           </div>
         </div>
       </header>
@@ -126,7 +126,7 @@ export default async function PublicEventPage(props: { params: Promise<{ slug: s
                   </div>
                   <div>
                     <h3 className="font-label-sm text-[12px] text-text-muted uppercase tracking-wider mb-1">Penyelenggara</h3>
-                    <p className="font-body-md text-[16px] text-text-main font-semibold">EventFlow Organizer</p>
+                    <p className="font-body-md text-[16px] text-text-main font-semibold">Event Ku Organizer</p>
                   </div>
                 </div>
                 <div className="bg-surface-container-low rounded-lg p-4 border border-border-light/50">

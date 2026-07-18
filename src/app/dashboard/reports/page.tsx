@@ -22,7 +22,7 @@ export default async function ReportsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-headline-lg text-[28px] font-semibold text-text-main">Laporan & Analitik</h1>
-        <p className="text-body-sm text-[14px] text-text-muted mt-1">Ringkasan statistik sistem EventFlow</p>
+        <p className="text-body-sm text-[14px] text-text-muted mt-1">Ringkasan statistik sistem Event Ku</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

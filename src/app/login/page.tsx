@@ -49,7 +49,7 @@ export default function LoginPage() {
             <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-sm">
               <span className="material-symbols-outlined text-on-primary" style={{ fontVariationSettings: "'FILL' 1" }}>dataset</span>
             </div>
-            <h1 className="font-headline-lg text-[28px] font-semibold text-primary tracking-tight">EventFlow</h1>
+            <h1 className="font-headline-lg text-[28px] font-semibold text-primary tracking-tight">Event Ku</h1>
             <p className="font-body-sm text-[14px] text-text-muted mt-2 text-center">Sistem Manajemen Logistik Enterprise</p>
           </div>
           

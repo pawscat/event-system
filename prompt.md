@@ -462,7 +462,7 @@ Test case kritis: dua scanner memindai QR sama pada waktu hampir bersamaan—tep
 Salin seluruh prompt berikut bersama referensi desain UI hasil Google Stitch.
 
 ```text
-Build a production-ready modular-monolith web application named “EventFlow — Event Management System with QR Code Check-in”. Use the supplied Google Stitch UI as the visual source of truth. Do not add wedding-specific features.
+Build a production-ready modular-monolith web application named “Event Ku — Event Management System with QR Code Check-in”. Use the supplied Google Stitch UI as the visual source of truth. Do not add wedding-specific features.
 
 Technology requirements:
 - TypeScript end-to-end.

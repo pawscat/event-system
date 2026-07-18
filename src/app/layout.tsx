@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "EventFlow - Event Management System",
+  title: "Event Ku - Event Management System",
   description: "Sistem Manajemen Logistik Enterprise",
 };
 

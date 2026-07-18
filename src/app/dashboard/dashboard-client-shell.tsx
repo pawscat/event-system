@@ -34,7 +34,7 @@ export function DashboardClientShell({
           <div>
             <h1 className="text-headline-sm font-semibold text-on-primary flex items-center gap-2">
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>event</span>
-              EventFlow
+              Event Ku
             </h1>
             <p className="font-label-sm text-[12px] text-on-primary-fixed-variant mt-1">
               {isSuperAdmin ? 'Super Admin Panel' : 'Admin Panel'}

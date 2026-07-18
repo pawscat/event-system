@@ -1,5 +1,5 @@
 ---
-name: EventFlow Core
+name: Event Ku Core
 colors:
   surface: '#fbf8fc'
   surface-dim: '#dbd9dc'

@@ -125,7 +125,7 @@ export function EventForm({ initialData, eventId }: { initialData?: Partial<Even
             <label className="block font-label-md text-[14px] font-semibold text-text-main">URL Slug <span className="text-danger">*</span></label>
             <div className="flex items-center">
               <span className="px-4 py-2 bg-surface-container-low border border-r-0 border-border-light rounded-l-lg text-text-muted font-body-sm">
-                eventflow.id/public/events/
+                eventku.id/public/events/
               </span>
               <input 
                 required
