@@ -137,7 +137,7 @@ export default function ForgotPasswordPage() {
             {step === 'email' 
               ? 'Masukkan alamat email admin Anda untuk mendapatkan kode OTP pemulihan.' 
               : step === 'otp' 
-              ? `Masukkan kode OTP yang telah dikirim ke ${email}.`
+              ? `Masukkan 6 digit kode OTP yang telah dikirim ke ${email}.`
               : 'Silakan masukkan kata sandi baru Anda untuk akun ini.'}
           </p>
         </div>
@@ -189,7 +189,7 @@ export default function ForgotPasswordPage() {
         {step === 'otp' && (
           <form onSubmit={handleVerifyOtp} className="space-y-5">
             <div className="space-y-1.5">
-              <label className="block font-label-md text-[14px] font-semibold text-text-main" htmlFor="otp">Kode OTP</label>
+              <label className="block font-label-md text-[14px] font-semibold text-text-main" htmlFor="otp">Kode OTP (6 Digit)</label>
               <div className="relative input-focus-ring rounded-lg transition-shadow">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                   <span className="material-symbols-outlined text-text-muted text-[20px]">password</span>
@@ -200,7 +200,7 @@ export default function ForgotPasswordPage() {
                   type="text"
                   placeholder="••••••"
                   required
-                  maxLength={8}
+                  maxLength={6}
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))} // only numbers
                   disabled={loading}
