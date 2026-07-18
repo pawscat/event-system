@@ -19,8 +19,8 @@ export default async function GlobalParticipantsPage() {
   // Fetch all participants and their event name using foreign key relationship
   const { data: participants, error } = await supabase
     .from('participants')
-    .select('*, event:events(title, slug)')
-    .order('created_at', { ascending: false })
+    .select('*, event:events(name, slug), ticket:tickets(ticket_status)')
+    .order('registered_at', { ascending: false })
 
   return (
     <div>
@@ -57,24 +57,24 @@ export default async function GlobalParticipantsPage() {
                   return (
                     <tr key={p.id} className="hover:bg-surface-container-lowest transition-colors">
                       <td className="p-4">
-                        <div className="font-semibold">{p.name}</div>
-                        <div className="text-text-muted text-[12px]">{p.company} - {p.job_title}</div>
+                        <div className="font-semibold">{p.full_name}</div>
+                        <div className="text-text-muted text-[12px]">{p.organization} - {p.job_title}</div>
                       </td>
                       <td className="p-4">
-                        <div>{p.email}</div>
-                        <div className="text-text-muted">{p.phone}</div>
+                        <div>{p.email_normalized}</div>
+                        <div className="text-text-muted">{p.phone_number}</div>
                       </td>
                       <td className="p-4">
                         {eventData ? (
                           <Link href={`/dashboard/super-admin/events/${eventData.slug}/overview`} className="text-secondary hover:underline font-medium">
-                            {eventData.title}
+                            {eventData.name}
                           </Link>
                         ) : (
                           <span className="text-text-muted italic">Event Tidak Diketahui</span>
                         )}
                       </td>
                       <td className="p-4">
-                        {p.check_in_status ? (
+                        {p.ticket?.[0]?.ticket_status === 'checked_in' || p.ticket?.ticket_status === 'checked_in' ? (
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[12px] font-semibold bg-success/10 text-success">
                             <span className="w-1.5 h-1.5 rounded-full bg-success"></span>
                             Sudah Hadir
@@ -87,7 +87,7 @@ export default async function GlobalParticipantsPage() {
                         )}
                       </td>
                       <td className="p-4 text-text-muted">
-                        {new Date(p.created_at).toLocaleDateString('id-ID', {
+                        {new Date(p.registered_at).toLocaleDateString('id-ID', {
                           day: 'numeric',
                           month: 'short',
                           year: 'numeric'
