@@ -23,7 +23,7 @@ export default async function AdminAccountsPage() {
       role,
       status,
       created_at,
-      event_staff_assignments (
+      event_staff_assignments!event_staff_assignments_user_id_fkey (
         id,
         role,
         status,
@@ -87,7 +87,7 @@ export default async function AdminAccountsPage() {
 
       <div className="bg-surface rounded-2xl shadow-sm border border-border-light overflow-hidden flex-1 flex flex-col">
         {error ? (
-          <div className="p-8 text-center text-error">Gagal memuat data akun admin.</div>
+          <div className="p-8 text-center text-error">Gagal memuat data akun admin. Detail: {error.message}</div>
         ) : (
           <AdminAccountsClient initialUsers={formattedUsers} events={events || []} />
         )}
