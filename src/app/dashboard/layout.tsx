@@ -1,4 +1,3 @@
-import { DashboardClientShell } from './dashboard-client-shell'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -29,19 +28,7 @@ export default async function DashboardLayout({
     redirect('/login')
   }
 
-  // Get user details
-  const { data: userData } = await supabase
-    .from('users')
-    .select('full_name, role')
-    .eq('auth_provider_id', user.id)
-    .single()
-
-  const userName = userData?.full_name || user.email || 'Admin'
-  const isSuperAdmin = userData?.role === 'super_admin'
-
-  return (
-    <DashboardClientShell isSuperAdmin={isSuperAdmin} userName={userName}>
-      {children}
-    </DashboardClientShell>
-  )
+  // We just enforce login here. 
+  // The specific role enforcement and shell wrapping is done in sub-layouts.
+  return <>{children}</>
 }

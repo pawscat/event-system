@@ -2,16 +2,23 @@
 
 import { useState } from 'react'
 import { SidebarNav } from './sidebar-nav'
+import { EventSwitcher, EventOption } from './event-switcher'
 import { UserNav } from './user-nav'
+
+export type DashboardType = 'super-admin' | 'admin-event' | 'admin-registrasi' | 'admin-scanner'
 
 export function DashboardClientShell({
   children,
-  isSuperAdmin,
+  dashboardType,
   userName,
+  eventOptions = [],
+  activeEventId = null,
 }: {
   children: React.ReactNode
-  isSuperAdmin: boolean
+  dashboardType: DashboardType
   userName: string
+  eventOptions?: EventOption[]
+  activeEventId?: string | null
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
@@ -37,7 +44,10 @@ export function DashboardClientShell({
               Event Ku
             </h1>
             <p className="font-label-sm text-[12px] text-on-primary-fixed-variant mt-1">
-              {isSuperAdmin ? 'Super Admin Panel' : 'Admin Panel'}
+              {dashboardType === 'super-admin' && 'Super Admin Panel'}
+              {dashboardType === 'admin-event' && 'Event Admin'}
+              {dashboardType === 'admin-registrasi' && 'Registration Admin'}
+              {dashboardType === 'admin-scanner' && 'Scanner Admin'}
             </p>
           </div>
           <button onClick={closeSidebar} className="lg:hidden text-on-primary-fixed-variant hover:text-on-primary p-1">
@@ -45,7 +55,7 @@ export function DashboardClientShell({
           </button>
         </div>
         <div onClick={() => { if (window.innerWidth < 1024) closeSidebar() }} className="flex-1 flex flex-col gap-1 w-full">
-          <SidebarNav isSuperAdmin={isSuperAdmin} />
+          <SidebarNav dashboardType={dashboardType} />
         </div>
       </aside>
 
@@ -56,14 +66,22 @@ export function DashboardClientShell({
             <span className="material-symbols-outlined">menu</span>
           </button>
           
-          <div className="relative flex-1 max-w-md hidden sm:block">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
-            <input
-              className="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-sm font-body-sm text-text-main placeholder:text-text-muted outline-none"
-              placeholder="Cari acara, peserta, atau laporan..."
-              type="text"
-            />
-          </div>
+          {dashboardType !== 'super-admin' && eventOptions.length > 0 && (
+            <div className="hidden sm:block">
+              <EventSwitcher events={eventOptions} activeEventId={activeEventId} />
+            </div>
+          )}
+          
+          {dashboardType === 'super-admin' && (
+            <div className="relative flex-1 max-w-md hidden sm:block">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+              <input
+                className="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-sm font-body-sm text-text-main placeholder:text-text-muted outline-none"
+                placeholder="Cari acara, peserta, atau laporan..."
+                type="text"
+              />
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-2 sm:gap-4 ml-4">
           <button className="text-text-muted hover:text-text-main hover:bg-surface-container-low rounded-full p-2 scale-95 active:scale-100 transition-transform relative">
