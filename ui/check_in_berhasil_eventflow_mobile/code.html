@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Berhasil Check-in - EventFlow</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "border-light": "#E5E7EB",
+                    "danger": "#EF4444",
+                    "surface-container-high": "#e9e7eb",
+                    "on-secondary-container": "#fffbff",
+                    "on-tertiary-container": "#b08d5b",
+                    "text-main": "#111827",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#081b3a",
+                    "on-tertiary-fixed": "#291800",
+                    "secondary-container": "#645efb",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#1a2b4b",
+                    "outline-variant": "#c5c6cf",
+                    "on-background": "#1b1b1e",
+                    "on-secondary-fixed-variant": "#3323cc",
+                    "on-primary": "#ffffff",
+                    "secondary": "#4b41e1",
+                    "surface": "#fbf8fc",
+                    "secondary-fixed": "#e2dfff",
+                    "surface-tint": "#4e5e81",
+                    "surface-container-highest": "#e4e2e5",
+                    "tertiary-fixed": "#ffddb1",
+                    "tertiary-container": "#3e2700",
+                    "outline": "#75777f",
+                    "background": "#fbf8fc",
+                    "inverse-on-surface": "#f2f0f3",
+                    "background-subtle": "#F9FAFB",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "surface-container-low": "#f5f3f6",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#8293b8",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#5d4217",
+                    "text-muted": "#6B7280",
+                    "inverse-surface": "#303033",
+                    "tertiary-fixed-dim": "#e8c08a",
+                    "on-secondary-fixed": "#0f0069",
+                    "on-primary-fixed-variant": "#364768",
+                    "surface-bright": "#fbf8fc",
+                    "error": "#ba1a1a",
+                    "primary": "#031635",
+                    "primary-fixed-dim": "#b6c6ef",
+                    "surface-variant": "#e4e2e5",
+                    "inverse-primary": "#b6c6ef",
+                    "on-error": "#ffffff",
+                    "success": "#10B981",
+                    "surface-container": "#efedf0",
+                    "on-surface": "#1b1b1e",
+                    "tertiary": "#231400",
+                    "on-surface-variant": "#44474e",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dbd9dc",
+                    "warning": "#F59E0B"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-collapsed": "80px",
+                    "container-max": "1280px",
+                    "gutter": "16px",
+                    "margin-page": "24px",
+                    "sidebar-width": "260px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                    "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                    "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                    "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                    "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        /* Custom animations for success screen */
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes slideUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .animate-pop-in { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest font-body-md text-text-main antialiased min-h-screen flex flex-col">
+<!-- Transactional Screen: Navigation Suppressed per JSON directives -->
+<!-- Top Bar Actions (Optional, for aborting/closing) -->
+<header class="w-full flex justify-end p-gutter">
+<button aria-label="Tutup" class="p-2 text-text-muted hover:bg-surface-container-low rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-page w-full max-w-md mx-auto relative pb-8">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-success/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Success Graphic Area -->
+<div class="flex flex-col items-center mb-8 animate-pop-in">
+<div class="relative w-24 h-24 bg-success/10 rounded-full flex items-center justify-center mb-4 border-4 border-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[64px] text-success" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-text-main text-center mb-1">Berhasil Check-in</h1>
+<p class="font-body-md text-body-md text-text-muted text-center">Peserta telah terdaftar pada event.</p>
+</div>
+<!-- Participant Details Card (Bento Style) -->
+<div class="w-full bg-surface rounded-xl border border-border-light shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 mb-8 flex flex-col gap-5 opacity-0 animate-slide-up delay-100 relative overflow-hidden">
+<!-- Decorative Accent line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-success"></div>
+<!-- Header: Name & Organization -->
+<div class="text-center pt-2">
+<h2 class="font-headline-sm text-headline-sm text-text-main mb-1">Budi Santoso</h2>
+<p class="font-body-sm text-body-sm text-text-muted">PT Teknologi Jaya</p>
+<!-- Status Badge -->
+<div class="mt-4 inline-flex items-center gap-1.5 px-3 py-1 bg-[#d1fae5] text-[#065f46] rounded-full font-label-sm text-label-sm border border-[#a7f3d0]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">how_to_reg</span>
+                    Status: Hadir
+                </div>
+</div>
+<div class="h-px bg-border-light w-full"></div>
+<!-- Grid Details -->
+<div class="grid grid-cols-2 gap-y-4 gap-x-4">
+<div class="col-span-1">
+<p class="font-label-sm text-label-sm text-text-muted mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">badge</span>
+                        ID Tamu
+                    </p>
+<p class="font-body-md text-body-md text-text-main font-semibold">EF-10293</p>
+</div>
+<div class="col-span-1">
+<p class="font-label-sm text-label-sm text-text-muted mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        Waktu Check-in
+                    </p>
+<p class="font-body-md text-body-md text-text-main font-semibold">09:15 WIB</p>
+</div>
+<div class="col-span-2 bg-surface-container-low rounded-lg p-3 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary">support_agent</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-text-muted">Staff Pemindai</p>
+<p class="font-body-sm text-body-sm text-text-main font-medium">Siska Admin</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full mt-auto opacity-0 animate-slide-up delay-200">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg shadow-[0_4px_10px_rgba(3,22,53,0.2)] flex items-center justify-center gap-2 hover:bg-primary/90 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+                Scan Peserta Berikutnya
+            </button>
+<button class="w-full mt-3 bg-transparent text-text-main border border-border-light font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+                Lihat Detail Lengkap
+            </button>
+</div>
+</main>
+</body></html>

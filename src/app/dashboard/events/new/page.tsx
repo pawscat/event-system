@@ -1,0 +1,21 @@
+import { EventForm } from '../event-form'
+import Link from 'next/link'
+
+export default function NewEventPage() {
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div className="text-body-sm text-[14px] text-text-muted mb-1 flex items-center gap-2">
+            <Link href="/dashboard/events" className="hover:text-secondary cursor-pointer">Acara</Link>
+            <span className="material-symbols-outlined text-sm">chevron_right</span>
+            <span className="text-text-main font-medium">Buat Acara Baru</span>
+          </div>
+          <h1 className="font-headline-lg text-[28px] font-semibold text-text-main">Buat Acara Baru</h1>
+        </div>
+      </div>
+
+      <EventForm />
+    </div>
+  )
+}

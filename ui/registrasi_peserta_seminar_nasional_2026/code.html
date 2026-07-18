@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registrasi Event - Seminar Nasional Transformasi Digital 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#d8e2ff",
+                        "border-light": "#E5E7EB",
+                        "danger": "#EF4444",
+                        "surface-container-high": "#e9e7eb",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#b08d5b",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#081b3a",
+                        "on-tertiary-fixed": "#291800",
+                        "secondary-container": "#645efb",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1a2b4b",
+                        "outline-variant": "#c5c6cf",
+                        "on-background": "#1b1b1e",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#4b41e1",
+                        "surface": "#fbf8fc",
+                        "secondary-fixed": "#e2dfff",
+                        "surface-tint": "#4e5e81",
+                        "surface-container-highest": "#e4e2e5",
+                        "tertiary-fixed": "#ffddb1",
+                        "tertiary-container": "#3e2700",
+                        "outline": "#75777f",
+                        "background": "#fbf8fc",
+                        "inverse-on-surface": "#f2f0f3",
+                        "background-subtle": "#F9FAFB",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f5f3f6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#8293b8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "text-muted": "#6B7280",
+                        "inverse-surface": "#303033",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "on-secondary-fixed": "#0f0069",
+                        "on-primary-fixed-variant": "#364768",
+                        "surface-bright": "#fbf8fc",
+                        "error": "#ba1a1a",
+                        "primary": "#031635",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "surface-variant": "#e4e2e5",
+                        "inverse-primary": "#b6c6ef",
+                        "on-error": "#ffffff",
+                        "success": "#10B981",
+                        "surface-container": "#efedf0",
+                        "on-surface": "#1b1b1e",
+                        "tertiary": "#231400",
+                        "on-surface-variant": "#44474e",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbd9dc",
+                        "warning": "#F59E0B"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "sidebar-collapsed": "80px",
+                        "container-max": "1280px",
+                        "gutter": "16px",
+                        "margin-page": "24px",
+                        "sidebar-width": "260px",
+                        "base": "4px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-subtle text-on-surface antialiased min-h-screen">
+<!-- Top Navigation (Minimal for Public Page) -->
+<header class="bg-surface dark:bg-surface-dim border-b border-border-light dark:border-outline-variant sticky top-0 z-40">
+<div class="max-w-container-max mx-auto px-margin-page h-16 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="event">event</span>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">EventFlow</span>
+</div>
+<nav class="hidden md:flex gap-6">
+<a class="text-text-muted hover:text-text-main font-label-md text-label-md transition-colors" href="#">Beranda</a>
+<a class="text-text-muted hover:text-text-main font-label-md text-label-md transition-colors" href="#">Jadwal</a>
+<a class="text-text-muted hover:text-text-main font-label-md text-label-md transition-colors" href="#">Pembicara</a>
+</nav>
+</div>
+</header>
+<main class="pb-24">
+<!-- Hero Banner Section -->
+<section class="relative w-full h-[300px] md:h-[400px] bg-primary">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay" data-alt="A modern, abstract digital graphic representing digital transformation, featuring sleek lines, glowing data nodes, and a professional corporate color palette of deep indigo and soft white. The image is a wide banner, conveying high-tech innovation in a bright, clean B2B software aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWUbAAyxlHO43tVb4-RkYa-VhiZYbJefXVs6_rhcgOC8xv7k64Ng4GyMZ85NNJ7mZjPWzNHVPMSYoJ5KowolDZTZXxQxJK3psOoZP_yAUbWppcrfGO8ok7DsGuX8Oy4XSjHSIf6Wa5d1kIv138XHqdihDu2CSfl8ccNG-4QgQuTBdZrS1U4xP-2FHl6QWlFP8BmIBIJC0opJAHHEOHdZyDVZlsr6MfJ6w0WmKweFISU0TB0VcUeNGpfxIk-7I51AJvmOuJHa2whg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary to-transparent opacity-80"></div>
+<div class="absolute inset-0 flex flex-col justify-end max-w-container-max mx-auto px-margin-page pb-12">
+<div class="inline-flex items-center gap-2 bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded-full mb-4 w-fit backdrop-blur-sm border border-secondary/30">
+<span class="material-symbols-outlined text-sm" data-icon="campaign">campaign</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Pendaftaran Terbuka</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-[48px] md:leading-[56px] text-on-primary mb-2 max-w-3xl">Seminar Nasional Transformasi Digital 2026</h1>
+<p class="font-body-lg text-body-lg text-on-primary/80 max-w-2xl">Membangun Ekosistem Digital yang Resilien dan Inklusif untuk Masa Depan Bisnis Indonesia.</p>
+</div>
+</section>
+<div class="max-w-container-max mx-auto px-margin-page mt-[-40px] md:mt-[-60px] relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Event Details (Left Column) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Event Info Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light p-6">
+<h2 class="font-headline-sm text-headline-sm text-text-main mb-6 border-b border-border-light pb-4">Detail Acara</h2>
+<div class="flex flex-col gap-5">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-text-muted mb-1">Tanggal</h3>
+<p class="font-body-md text-body-md text-text-main font-medium">15 Oktober 2026</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="schedule">schedule</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-text-muted mb-1">Waktu</h3>
+<p class="font-body-md text-body-md text-text-main font-medium">08:00 - 16:00 WIB</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-text-muted mb-1">Lokasi</h3>
+<p class="font-body-md text-body-md text-text-main font-medium">Jakarta Convention Center</p>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Jl. Jend. Gatot Subroto, Senayan</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Organizer Info Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light p-6">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-border-light flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist corporate logo for a tech ministry or industry association, featuring geometric shapes in deep blue and silver on a white background, highly professional B2B software style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2HxijiAU4QYsrcTtg0T_59_4L88CaQlU15yW0DrEy5At4321MTHmw29zjPTMbuwWqGgpetDoG7H2Zwxgl9me8rIFNAb3QrwaeGqyggHhSvK-DQhbtE6dMJu0-TYdJwNl-Y0-CMeEpgWRPt-CpdSAIzqP_JtGRFNn4RVBRAuQImwDV8PiSEh-wIC4gVdQ-hGGkXXO7HHqyXBQ1OXmMU1QUBVS7w8hBjDQexiYGQuMk2MtbfqITLXCus362bG64VpqHYcFkTSLzjQ"/>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider mb-1">Penyelenggara</h3>
+<p class="font-body-md text-body-md text-text-main font-semibold">Kementerian Komunikasi</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 border border-border-light/50">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-text-muted">Batas Pendaftaran</span>
+<span class="font-label-md text-label-md text-danger">10 Okt 2026</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-text-muted">Sisa Kuota</span>
+<span class="inline-flex items-center gap-1 bg-success/10 text-success font-label-sm text-label-sm px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+                                    Tersedia (45 Kursi)
+                                </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Registration Form (Right Column) -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light overflow-hidden">
+<div class="p-6 md:p-8">
+<h2 class="font-headline-md text-headline-md text-text-main mb-2">Formulir Pendaftaran</h2>
+<p class="font-body-sm text-body-sm text-text-muted mb-8">Lengkapi data diri Anda di bawah ini untuk mengamankan kursi Anda. Pastikan email dan nomor WhatsApp aktif untuk menerima tiket elektronik.</p>
+<form class="space-y-6" id="registrationForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Full Name -->
+<div class="space-y-2 md:col-span-2">
+<label class="block font-label-md text-label-md text-text-main" for="fullName">Nama Lengkap <span class="text-danger">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="person">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-surface border border-border-light rounded-lg text-text-main font-body-md focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="fullName" name="fullName" placeholder="Cth: Budi Santoso" required="" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-text-main" for="email">Alamat Email <span class="text-danger">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-surface border border-border-light rounded-lg text-text-main font-body-md focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="email" name="email" placeholder="budi@contoh.com" required="" type="email"/>
+</div>
+</div>
+<!-- WhatsApp -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-text-main" for="whatsapp">Nomor WhatsApp <span class="text-danger">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="text-text-muted font-body-md">+62</span>
+</div>
+<input class="block w-full pl-12 pr-3 py-2.5 bg-surface border border-border-light rounded-lg text-text-main font-body-md focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="whatsapp" name="whatsapp" placeholder="81234567890" required="" type="tel"/>
+</div>
+</div>
+<!-- Institution -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-text-main" for="institution">Instansi / Perusahaan <span class="text-danger">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="business">business</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-surface border border-border-light rounded-lg text-text-main font-body-md focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="institution" name="institution" placeholder="Nama perusahaan atau instansi" required="" type="text"/>
+</div>
+</div>
+<!-- Job Title -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-text-main" for="jobTitle">Jabatan <span class="text-danger">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]" data-icon="work">work</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-surface border border-border-light rounded-lg text-text-main font-body-md focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="jobTitle" name="jobTitle" placeholder="Cth: IT Manager" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Privacy Policy Checkbox -->
+<div class="pt-4 border-t border-border-light mt-6">
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center mt-1">
+<input class="w-5 h-5 border-2 border-outline-variant rounded bg-surface checked:bg-primary checked:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none peer" id="privacyPolicy" required="" type="checkbox"/>
+<span class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-on-primary text-[16px] pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" data-icon="check" data-weight="fill">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted leading-tight group-hover:text-text-main transition-colors">
+                                            Saya menyetujui bahwa data yang saya berikan akan disimpan dan diproses sesuai dengan Kebijakan Privasi untuk keperluan penyelenggaraan acara ini.
+                                        </span>
+</label>
+</div>
+<!-- Submit Actions -->
+<div class="flex flex-col sm:flex-row items-center justify-end gap-4 pt-6">
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-border-light bg-surface text-text-main font-label-md text-label-md hover:bg-surface-container-low transition-colors text-center" type="button">Batal</button>
+<button class="w-full sm:w-auto px-8 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 transition-colors shadow-md flex items-center justify-center gap-2" id="submitBtn" type="button">
+<span>Kirim Pendaftaran</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Success State (Hidden by default) -->
+<div class="hidden flex flex-col items-center justify-center py-12 text-center" id="successState">
+<div class="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-success text-[40px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-main mb-2">Pendaftaran Berhasil!</h3>
+<p class="font-body-md text-body-md text-text-muted max-w-md mx-auto mb-8">Terima kasih telah mendaftar. E-Tiket dan informasi lebih lanjut mengenai seminar telah dikirimkan ke email dan WhatsApp Anda.</p>
+<button class="px-6 py-2.5 rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-primary/5 transition-colors" onclick="resetForm()">Daftar Peserta Lain</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('registrationForm');
+        const successState = document.getElementById('successState');
+        const privacyPolicy = document.getElementById('privacyPolicy');
+
+        submitBtn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                // Simulate loading state
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> <span class="ml-2">Memproses...</span>';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    form.classList.add('hidden');
+                    successState.classList.remove('hidden');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        function resetForm() {
+            form.reset();
+            form.classList.remove('hidden');
+            successState.classList.add('hidden');
+        }
+    </script>
+</body></html>

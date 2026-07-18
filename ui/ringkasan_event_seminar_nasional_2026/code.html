@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventFlow - Event Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "border-light": "#E5E7EB",
+                        "danger": "#EF4444",
+                        "surface-container-high": "#e9e7eb",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#b08d5b",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#081b3a",
+                        "on-tertiary-fixed": "#291800",
+                        "secondary-container": "#645efb",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1a2b4b",
+                        "outline-variant": "#c5c6cf",
+                        "on-background": "#1b1b1e",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#4b41e1",
+                        "surface": "#fbf8fc",
+                        "secondary-fixed": "#e2dfff",
+                        "surface-tint": "#4e5e81",
+                        "surface-container-highest": "#e4e2e5",
+                        "tertiary-fixed": "#ffddb1",
+                        "tertiary-container": "#3e2700",
+                        "outline": "#75777f",
+                        "background": "#fbf8fc",
+                        "inverse-on-surface": "#f2f0f3",
+                        "background-subtle": "#F9FAFB",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f5f3f6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#8293b8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "text-muted": "#6B7280",
+                        "inverse-surface": "#303033",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "on-secondary-fixed": "#0f0069",
+                        "on-primary-fixed-variant": "#364768",
+                        "surface-bright": "#fbf8fc",
+                        "error": "#ba1a1a",
+                        "primary": "#031635",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "surface-variant": "#e4e2e5",
+                        "inverse-primary": "#b6c6ef",
+                        "on-error": "#ffffff",
+                        "success": "#10B981",
+                        "surface-container": "#efedf0",
+                        "on-surface": "#1b1b1e",
+                        "tertiary": "#231400",
+                        "on-surface-variant": "#44474e",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbd9dc",
+                        "warning": "#F59E0B"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-collapsed": "80px",
+                        "container-max": "1280px",
+                        "gutter": "16px",
+                        "margin-page": "24px",
+                        "sidebar-width": "260px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-subtle text-on-background font-body-md min-h-screen">
+<!-- TopNavBar (Web & Mobile) -->
+<header class="fixed top-0 right-0 w-[calc(100%-var(--sidebar-width))] flex justify-between items-center h-16 px-margin-page bg-surface z-40 border-b border-border-light max-md:w-full">
+<div class="flex items-center gap-4">
+<div class="font-headline-sm text-headline-sm text-primary max-md:block hidden font-bold">EventFlow</div>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="pl-10 pr-4 py-2 border border-border-light rounded-lg focus:outline-none focus:border-secondary bg-surface-container-lowest text-text-main text-body-sm w-64" placeholder="Cari..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-low rounded-full p-2 scale-95 active:scale-100 transition-transform text-text-muted hover:text-text-main flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-surface-container-low rounded-full p-2 scale-95 active:scale-100 transition-transform text-text-muted hover:text-text-main flex items-center justify-center">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-md text-label-md overflow-hidden shrink-0 ml-2 shadow-sm border border-border-light">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate event manager, brightly lit studio setting, modern light mode aesthetic, soft shadow background, confident smile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrhRFTEs_ZARWGzNvc5-5Ls0BsK9fV8VQIc82jNQgk7vPZngahHnjzB-rtVd05HCBc2J1WQSybpWiUbRDqUjkV21Gi_tx9_Gnm2UJFTngQgFe4E0GPPsOxZqW5_8584W2Y2_l3LVopE27QOxW5ARANeDitCUAfQzWri6KKgVDZOPtaJLFo8iXqX1LWaQ9mzCpRUzz-wvU_FjBLRAUNvy8pgylnJjwWXAEvAuhk-nvj77OGkOBUkvBrbBK8hRqGzms-N8nYbnlblg"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Web Only) -->
+<nav class="fixed h-full w-sidebar-width left-0 top-0 bg-primary flex flex-col py-gutter shadow-md z-50 hidden md:flex">
+<div class="px-margin-page mb-8">
+<div class="font-headline-sm text-headline-sm text-on-primary font-bold">EventFlow</div>
+<div class="font-label-sm text-label-sm text-on-primary-container mt-1">Logistik Event</div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 mx-2 font-label-md text-label-md opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Ringkasan
+            </a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 hover:bg-primary-fixed-dim/10 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">event</span>
+                Acara
+            </a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 hover:bg-primary-fixed-dim/10 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">group</span>
+                Peserta
+            </a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 hover:bg-primary-fixed-dim/10 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">assessment</span>
+                Laporan
+            </a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 hover:bg-primary-fixed-dim/10 transition-colors font-label-md text-label-md mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Pengaturan
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-[var(--sidebar-width)] pt-16 min-h-screen pb-24 md:pb-8">
+<div class="p-margin-page max-w-container-max mx-auto space-y-6">
+<!-- Breadcrumbs & Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="text-body-sm font-body-sm text-text-muted mb-1 flex items-center gap-2">
+<span class="hover:text-secondary cursor-pointer">Acara</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-text-main font-medium">Seminar Nasional Transformasi Digital 2026</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-main md:block hidden">Dashboard Acara</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-text-main block md:hidden">Dashboard Acara</h1>
+</div>
+<div class="flex gap-2">
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                        Tambah Peserta
+                    </button>
+<button class="bg-surface-container-lowest text-secondary border border-secondary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm">qr_code_scanner</span>
+                        Buka Scanner
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Event Hero Card (Spans 8 cols on desktop) -->
+<div class="md:col-span-8 bg-surface-container-lowest border border-border-light rounded-xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.1)] relative">
+<div class="h-32 bg-gradient-to-r from-secondary-container to-secondary relative">
+<div class="absolute inset-0 opacity-20 mix-blend-overlay bg-cover bg-center" data-alt="A modern corporate seminar auditorium, clean white lines, blue accent lighting, shallow depth of field, high-end professional tech event aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDr_7Hnqe9693VlqLBJnQ_Z2ksZQWzjXCqxPQvgOUdYKKdeLotiGfPrCeMu1ZJha2B-DsdGYMGAgt-Mwwf0_eLL3jNC8NeO1-lTYeU-TEJEGxnrAGvqAVFZ0e4zhlgEIgYTMB7q-qvwM6I13HSsi7Ov28qKyiRWCEhs23mgTtK267ZMOqUJqsB73N_YuS-CvMjIkgUoEh2x-1r_ByenWs03hPFsXXH53oqoSCJvRHEInV7wX9q44_yWj5tZEkywuMKFzhh_skW-Gw')"></div>
+<div class="absolute bottom-4 left-6 flex items-center gap-2">
+<span class="bg-success/20 text-success px-2 py-1 rounded text-xs font-bold uppercase tracking-wider backdrop-blur-sm border border-success/30">Berlangsung</span>
+</div>
+</div>
+<div class="p-6">
+<h2 class="font-headline-md text-headline-md text-text-main mb-2">Seminar Nasional Transformasi Digital 2026</h2>
+<div class="flex flex-wrap gap-y-3 gap-x-6 text-body-sm font-body-sm text-text-muted mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                                24 Oktober 2026 • 09:00 - 17:00 WIB
+                            </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                                Jakarta Convention Center
+                            </div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between border border-border-light">
+<div>
+<div class="text-label-sm font-label-sm text-text-muted mb-1">Link Registrasi Publik</div>
+<div class="font-body-md text-body-md text-secondary truncate max-w-[200px] md:max-w-xs">eventflow.id/reg/transdigi26</div>
+</div>
+<button class="text-text-muted hover:text-secondary transition-colors p-2 rounded-md hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Actions (Spans 4 cols on desktop) -->
+<div class="md:col-span-4 bg-surface-container-lowest border border-border-light rounded-xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-4">Aksi Cepat</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center p-4 border border-border-light rounded-lg hover:border-secondary hover:bg-surface-container-low transition-all group text-center">
+<span class="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">upload_file</span>
+<span class="font-label-sm text-label-sm text-text-main">Import CSV</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 border border-border-light rounded-lg hover:border-secondary hover:bg-surface-container-low transition-all group text-center">
+<span class="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">campaign</span>
+<span class="font-label-sm text-label-sm text-text-main">Kirim Broadcast</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 border border-border-light rounded-lg hover:border-secondary hover:bg-surface-container-low transition-all group text-center">
+<span class="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">print</span>
+<span class="font-label-sm text-label-sm text-text-main">Cetak ID Card</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 border border-border-light rounded-lg hover:border-secondary hover:bg-surface-container-low transition-all group text-center">
+<span class="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">settings</span>
+<span class="font-label-sm text-label-sm text-text-main">Pengaturan Acara</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

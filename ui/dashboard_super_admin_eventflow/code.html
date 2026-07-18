@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventFlow - Super Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "border-light": "#E5E7EB",
+                    "danger": "#EF4444",
+                    "surface-container-high": "#e9e7eb",
+                    "on-secondary-container": "#fffbff",
+                    "on-tertiary-container": "#b08d5b",
+                    "text-main": "#111827",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#081b3a",
+                    "on-tertiary-fixed": "#291800",
+                    "secondary-container": "#645efb",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#1a2b4b",
+                    "outline-variant": "#c5c6cf",
+                    "on-background": "#1b1b1e",
+                    "on-secondary-fixed-variant": "#3323cc",
+                    "on-primary": "#ffffff",
+                    "secondary": "#4b41e1",
+                    "surface": "#fbf8fc",
+                    "secondary-fixed": "#e2dfff",
+                    "surface-tint": "#4e5e81",
+                    "surface-container-highest": "#e4e2e5",
+                    "tertiary-fixed": "#ffddb1",
+                    "tertiary-container": "#3e2700",
+                    "outline": "#75777f",
+                    "background": "#fbf8fc",
+                    "inverse-on-surface": "#f2f0f3",
+                    "background-subtle": "#F9FAFB",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "surface-container-low": "#f5f3f6",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#8293b8",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#5d4217",
+                    "text-muted": "#6B7280",
+                    "inverse-surface": "#303033",
+                    "tertiary-fixed-dim": "#e8c08a",
+                    "on-secondary-fixed": "#0f0069",
+                    "on-primary-fixed-variant": "#364768",
+                    "surface-bright": "#fbf8fc",
+                    "error": "#ba1a1a",
+                    "primary": "#031635",
+                    "primary-fixed-dim": "#b6c6ef",
+                    "surface-variant": "#e4e2e5",
+                    "inverse-primary": "#b6c6ef",
+                    "on-error": "#ffffff",
+                    "success": "#10B981",
+                    "surface-container": "#efedf0",
+                    "on-surface": "#1b1b1e",
+                    "tertiary": "#231400",
+                    "on-surface-variant": "#44474e",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dbd9dc",
+                    "warning": "#F59E0B"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-collapsed": "80px",
+                    "container-max": "1280px",
+                    "gutter": "16px",
+                    "margin-page": "24px",
+                    "sidebar-width": "260px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-subtle text-on-background font-body-md min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed h-full w-sidebar-width left-0 top-0 bg-primary shadow-md z-50 flex flex-col py-gutter">
+<div class="px-margin-page mb-8">
+<h1 class="text-headline-sm font-headline-sm text-on-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event</span>
+                EventFlow
+            </h1>
+<p class="font-label-sm text-label-sm text-on-primary-fixed-variant mt-1">Super Admin Panel</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 mx-2 transition-colors hover:bg-primary-fixed-dim/10" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Ringkasan</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 transition-colors hover:bg-primary-fixed-dim/10" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-label-md text-label-md">Acara</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 transition-colors hover:bg-primary-fixed-dim/10" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Peserta</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 transition-colors hover:bg-primary-fixed-dim/10" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary px-4 py-3 mx-2 transition-colors hover:bg-primary-fixed-dim/10" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+</nav>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-var(--sidebar-width))] flex justify-between items-center h-16 px-margin-page bg-surface z-40 border-b border-border-light">
+<div class="flex-1 max-w-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-sm font-body-sm text-text-main placeholder:text-text-muted" placeholder="Cari acara, peserta, atau laporan..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-text-muted hover:text-text-main hover:bg-surface-container-low rounded-full p-2 scale-95 active:scale-100 transition-transform relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full"></span>
+</button>
+<button class="text-text-muted hover:text-text-main hover:bg-surface-container-low rounded-full p-2 scale-95 active:scale-100 transition-transform">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-border-light ml-2">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an Indonesian tech executive in a brightly lit modern office setting. The lighting is soft and corporate, emphasizing trust and competence. The background features subtle glass partitions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsKxNDSq0A7Uo95sMy8Hm0p4VEBymFCOjjRsp6zsXO9owKrrwCw0zHm2YlALloKcLtx21y-CKvNaNOHVQIi_gYw0KQTS_5j0tgP0-DzM8-blN0jZVDnRqps2ntKcxgE4EAgjZ5ONY81fgF5CXfvheYDYyWGxoIr5vyaohr45ykou7CteJaSW1MJmeWVF9tXFEM5wmp33W9_Oq4Smw9MpixT4IjqivZWlUzI3ZESCQvwPsgTt-eoIa3IFJSwu6JADqQea8GyZ6ZIw"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[var(--sidebar-width)] pt-24 px-margin-page pb-12">
+<!-- Header & Quick Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Dashboard Super Admin</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Ringkasan performa sistem dan logistik acara terkini.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-surface text-secondary border border-secondary hover:bg-surface-container-low px-4 py-2 rounded-lg font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+                    Buat Akun Admin
+                </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary hover:bg-primary/90 px-4 py-2 rounded-lg font-label-md text-label-md shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                    Buat Event Baru
+                </button>
+</div>
+</div>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+<div class="bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-text-muted">Total Event</p>
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-1.5 rounded-md text-[20px]">event_note</span>
+</div>
+<div>
+<h3 class="font-display-lg text-display-lg text-text-main">142</h3>
+<p class="font-label-sm text-label-sm text-success mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12% dari bulan lalu
+                    </p>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-text-muted">Event Aktif</p>
+<span class="material-symbols-outlined text-secondary bg-secondary-fixed p-1.5 rounded-md text-[20px]">campaign</span>
+</div>
+<div>
+<h3 class="font-display-lg text-display-lg text-text-main">8</h3>
+<p class="font-label-sm text-label-sm text-text-muted mt-2">Berjalan minggu ini</p>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-text-muted">Total Registrasi</p>
+<span class="material-symbols-outlined text-on-tertiary-container bg-tertiary-fixed p-1.5 rounded-md text-[20px]">how_to_reg</span>
+</div>
+<div>
+<h3 class="font-display-lg text-display-lg text-text-main">24.5K</h3>
+<p class="font-label-sm text-label-sm text-success mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +8.4% dari bulan lalu
+                    </p>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-text-muted">Total Kehadiran</p>
+<span class="material-symbols-outlined text-success bg-success/10 p-1.5 rounded-md text-[20px]">fact_check</span>
+</div>
+<div>
+<h3 class="font-display-lg text-display-lg text-text-main">18.2K</h3>
+<p class="font-label-sm text-label-sm text-text-muted mt-2">Avg. Check-in Rate: 74%</p>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-text-muted">Email Delivery Rate</p>
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim/30 p-1.5 rounded-md text-[20px]">mark_email_read</span>
+</div>
+<div>
+<h3 class="font-display-lg text-display-lg text-text-main">99.8%</h3>
+<p class="font-label-sm text-label-sm text-danger mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span> 0.2% Bounced
+                    </p>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-4">Tren Registrasi vs Kehadiran (30 Hari Terakhir)</h3>
+<div class="h-64 w-full">
+<canvas id="trendChart"></canvas>
+</div>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-4">Aktivitas Terkini (Audit Log)</h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">edit_document</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-text-main">Budi S. memperbarui kapasitas <span class="font-semibold">Seminar Nasional Transformasi Digital 2026</span>.</p>
+<span class="font-label-sm text-label-sm text-text-muted">10 menit yang lalu</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px] text-secondary">person_add</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-text-main">Admin baru <span class="font-semibold">Siti A.</span> ditambahkan oleh System.</p>
+<span class="font-label-sm text-label-sm text-text-muted">1 jam yang lalu</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-danger/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px] text-danger">cancel</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-text-main">Event <span class="font-semibold">Workshop UI/UX</span> dibatalkan.</p>
+<span class="font-label-sm text-label-sm text-text-muted">Kemarin, 14:30</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px] text-success">check_circle</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-text-main">Laporan bulanan selesai di-generate.</p>
+<span class="font-label-sm text-label-sm text-text-muted">Kemarin, 09:00</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 font-label-md text-label-md text-secondary hover:bg-surface-container-low rounded-lg transition-colors">Lihat Semua Log</button>
+</div>
+</div>
+<!-- Data Table: Performa Event -->
+<div class="bg-surface rounded-xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.1)] overflow-hidden">
+<div class="p-6 border-b border-border-light flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-text-main">Performa Event Aktif</h3>
+<button class="font-label-md text-label-md text-text-muted hover:text-text-main flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F3F4F6]">
+<th class="p-3 font-label-md text-label-md text-text-muted">Banner</th>
+<th class="p-3 font-label-md text-label-md text-text-muted">Nama Event</th>
+<th class="p-3 font-label-md text-label-md text-text-muted">Kapasitas</th>
+<th class="p-3 font-label-md text-label-md text-text-muted">Registrasi</th>
+<th class="p-3 font-label-md text-label-md text-text-muted">Checked-in</th>
+<th class="p-3 font-label-md text-label-md text-text-muted">Attendance Rate</th>
+<th class="p-3 font-label-md text-label-md text-text-muted text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3">
+<div class="w-16 h-10 rounded bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A vibrant, modern banner for a digital transformation seminar. The design features abstract flowing digital lines in electric blue and crisp white on a deep navy background, conveying a sense of forward-thinking technology and professional enterprise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiyDya4Phb35A7vlzPwihBJKI4-qn-kBOTzp6xTT-2xzmGuD5dJdeiJ8fL4MV_mMcESxNI-6UbfETyJmbOgaEbkSDm6VKcFVHo7v4gO3l0SAbKaRXT3ahfaDLktToXX6v50Z65D4a5e4xp1TfxsBsoeumpq2WLYHURoMiQ60PhbFTerrfNC17-ROpGqlwiOlwY-ia_DOMAbNLAMRBNjK_nzeNiBvm0TZrrIx-gPXuAQ7oZM0Fs2171XPpGuzDOgG1MKc7IKfWyXw"/>
+</div>
+</td>
+<td class="p-3">
+<p class="font-label-md text-label-md text-text-main">Seminar Nasional Transformasi Digital 2026</p>
+<p class="font-body-sm text-body-sm text-text-muted">Jakarta, 12 Nov 2026</p>
+</td>
+<td class="p-3 font-body-sm text-body-sm text-text-main">5,000</td>
+<td class="p-3 font-body-sm text-body-sm text-text-main">4,850</td>
+<td class="p-3 font-body-sm text-body-sm text-text-main">3,920</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high rounded-full h-2 max-w-[80px]">
+<div class="bg-success h-2 rounded-full" style="width: 80%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-text-main">80%</span>
+</div>
+</td>
+<td class="p-3 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-1.5 text-text-muted hover:text-secondary rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">bar_chart</span></button>
+<button class="p-1.5 text-text-muted hover:text-text-main rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-3">
+<div class="w-16 h-10 rounded bg-surface-container-high overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-text-muted">image</span>
+</div>
+</td>
+<td class="p-3">
+<p class="font-label-md text-label-md text-text-main">Fintech Innovators Summit</p>
+<p class="font-body-sm text-body-sm text-text-muted">Bali, 20 Nov 2026</p>
+</td>
+<td class="p-3 font-body-sm text-body-sm text-text-main">1,200</td>
+<td class="p-3 font-body-sm text-body-sm text-text-main">1,200</td>
+<td class="p-3 font-body-sm text-body-sm text-text-main">150</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high rounded-full h-2 max-w-[80px]">
+<div class="bg-warning h-2 rounded-full" style="width: 12%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-text-main">12%</span>
+</div>
+<p class="text-[10px] text-text-muted mt-0.5">Sedang berlangsung</p>
+</td>
+<td class="p-3 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-1.5 text-text-muted hover:text-secondary rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">bar_chart</span></button>
+<button class="p-1.5 text-text-muted hover:text-text-main rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<script>
+        // Chart.js Configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            
+            // Primary color: #031635 (tailwind config)
+            // Secondary color: #4b41e1
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1 Nov', '5 Nov', '10 Nov', '15 Nov', '20 Nov', '25 Nov', '30 Nov'],
+                    datasets: [
+                        {
+                            label: 'Registrasi Baru',
+                            data: [150, 230, 180, 320, 290, 450, 380],
+                            borderColor: '#031635',
+                            backgroundColor: 'rgba(3, 22, 53, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Kehadiran (Check-in)',
+                            data: [120, 200, 150, 280, 250, 390, 310],
+                            borderColor: '#4b41e1',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 12
+                                },
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E5E7EB',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 11
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                }
+            });
+        });
+    </script>
+</body></html>

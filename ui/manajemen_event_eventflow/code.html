@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventFlow - Acara</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#d8e2ff",
+                    "border-light": "#E5E7EB",
+                    "danger": "#EF4444",
+                    "surface-container-high": "#e9e7eb",
+                    "on-secondary-container": "#fffbff",
+                    "on-tertiary-container": "#b08d5b",
+                    "text-main": "#111827",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#081b3a",
+                    "on-tertiary-fixed": "#291800",
+                    "secondary-container": "#645efb",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#1a2b4b",
+                    "outline-variant": "#c5c6cf",
+                    "on-background": "#1b1b1e",
+                    "on-secondary-fixed-variant": "#3323cc",
+                    "on-primary": "#ffffff",
+                    "secondary": "#4b41e1",
+                    "surface": "#fbf8fc",
+                    "secondary-fixed": "#e2dfff",
+                    "surface-tint": "#4e5e81",
+                    "surface-container-highest": "#e4e2e5",
+                    "tertiary-fixed": "#ffddb1",
+                    "tertiary-container": "#3e2700",
+                    "outline": "#75777f",
+                    "background": "#fbf8fc",
+                    "inverse-on-surface": "#f2f0f3",
+                    "background-subtle": "#F9FAFB",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "surface-container-low": "#f5f3f6",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#8293b8",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#5d4217",
+                    "text-muted": "#6B7280",
+                    "inverse-surface": "#303033",
+                    "tertiary-fixed-dim": "#e8c08a",
+                    "on-secondary-fixed": "#0f0069",
+                    "on-primary-fixed-variant": "#364768",
+                    "surface-bright": "#fbf8fc",
+                    "error": "#ba1a1a",
+                    "primary": "#031635",
+                    "primary-fixed-dim": "#b6c6ef",
+                    "surface-variant": "#e4e2e5",
+                    "inverse-primary": "#b6c6ef",
+                    "on-error": "#ffffff",
+                    "success": "#10B981",
+                    "surface-container": "#efedf0",
+                    "on-surface": "#1b1b1e",
+                    "tertiary": "#231400",
+                    "on-surface-variant": "#44474e",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dbd9dc",
+                    "warning": "#F59E0B"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-collapsed": "80px",
+                    "container-max": "1280px",
+                    "gutter": "16px",
+                    "margin-page": "24px",
+                    "sidebar-width": "260px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background-subtle text-on-surface font-body-md min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 right-0 w-[calc(100%-var(--sidebar-width))] flex justify-between items-center h-16 px-margin-page bg-surface z-40 border-b border-border-light hidden md:flex">
+<div class="flex items-center gap-4">
+<div class="font-headline-sm text-headline-sm text-primary">EventFlow</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-text-muted hover:text-text-main hover:bg-surface-container-low rounded-full p-2 transition-transform scale-95 active:scale-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-text-muted hover:text-text-main hover:bg-surface-container-low rounded-full p-2 transition-transform scale-95 active:scale-100">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden flex items-center justify-center">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate event administrator in a modern office environment. Soft, even lighting, conveying trust and reliability. Corporate B2B SaaS aesthetic, neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtmfpCaeuQCWJyT4l28w_o7kh9nFKj1zTXrfEnmmb8zUbMr1UNa5O-1UiDuyn_zGBpI2Ut30SfAoSI85OPbgp9DaLOYMSLdnOOYGmyuC10MvRyNml7HT0tAZB7r69erBxcbAfp8nnZZS8RKKSX71CuLqkn9UZIPaD_5Aejuc55QQg01kSXpUHy5Ka8gu8y5HaTHt5gBrhKr3sUi6BAlDEMFpmaU8tXvmn9LiviAulDWpRCWd8yBjkNJVYQrBk6PLbgzewEzCu8QQ"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed h-full w-sidebar-width left-0 top-0 bg-primary shadow-md z-50 flex flex-col py-gutter hidden md:flex">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-on-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm text-on-primary">EventFlow</div>
+<div class="text-label-sm font-label-sm text-on-primary-container">Logistik Event</div>
+</div>
+</div>
+<nav class="flex-1 font-label-md text-label-md">
+<!-- Ringkasan -->
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary hover:bg-primary-fixed-dim/10 transition-colors px-4 py-3 mx-2 rounded-lg opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Ringkasan
+            </a>
+<!-- Acara (Active) -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 mx-2 opacity-90 transition-opacity shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="event" data-weight="fill" style="font-variation-settings: 'FILL' 1;">event</span>
+                Acara
+            </a>
+<!-- Peserta -->
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary hover:bg-primary-fixed-dim/10 transition-colors px-4 py-3 mx-2 rounded-lg opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Peserta
+            </a>
+<!-- Laporan -->
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary hover:bg-primary-fixed-dim/10 transition-colors px-4 py-3 mx-2 rounded-lg opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+                Laporan
+            </a>
+<!-- Pengaturan -->
+<a class="flex items-center gap-3 text-on-primary-fixed-variant hover:text-on-primary hover:bg-primary-fixed-dim/10 transition-colors px-4 py-3 mx-2 rounded-lg opacity-90 transition-opacity mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Pengaturan
+            </a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-[260px] pt-16 min-h-screen">
+<div class="p-margin-page max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-text-main">Daftar Acara</h1>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Kelola seluruh kegiatan dan logistik acara Anda di satu tempat.</p>
+</div>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-6 py-2.5 rounded-lg hover:bg-secondary-container transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                    Tambah Event Baru
+                </button>
+</div>
+<!-- Filters Section -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-border-light mb-8 flex flex-col md:flex-row gap-4 items-end">
+<div class="flex-1 w-full relative">
+<label class="block font-label-sm text-label-sm text-text-muted mb-1.5">Pencarian</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border-light rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary font-body-sm text-body-sm text-text-main bg-surface-bright" placeholder="Cari nama acara..." type="text"/>
+</div>
+</div>
+<div class="w-full md:w-48">
+<label class="block font-label-sm text-label-sm text-text-muted mb-1.5">Status</label>
+<div class="relative">
+<select class="w-full appearance-none px-4 py-2 border border-border-light rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary font-body-sm text-body-sm text-text-main bg-surface-bright pr-10 cursor-pointer">
+<option value="">Semua Status</option>
+<option value="aktif">Aktif</option>
+<option value="draft">Draft</option>
+<option value="selesai">Selesai</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="w-full md:w-64">
+<label class="block font-label-sm text-label-sm text-text-muted mb-1.5">Rentang Tanggal</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" data-icon="calendar_today">calendar_today</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border-light rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary font-body-sm text-body-sm text-text-main bg-surface-bright cursor-pointer" placeholder="Pilih tanggal" readonly="" type="text" value="01 Okt - 31 Okt 2023"/>
+</div>
+</div>
+</div>
+<!-- Event List / Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-light overflow-hidden shadow-sm hover:shadow-md transition-shadow group relative flex flex-col">
+<div class="h-32 bg-surface-container relative w-full overflow-hidden">
+<div class="bg-cover bg-center w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-300" data-alt="A wide shot of a modern tech conference stage with a large screen displaying abstract data visualizations. Bright, professional lighting, corporate atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqruott5ibtowGvIGSOpnKu42_worY7m8R6vFJtcSSG1zQbEwpkI2296MLCtYsmrhsDTaLMFzJ29VauvMfrHzaSUGf0SPLOD8cQzUPLHeVHduxbSnzlozVT9fJ-tevXKqDNIACwFVjuhIRaWESVlNfe2tdCM55giYYdpX8H45vKtgmVIL1gEP_Enz_9Ada4sDXRFNhEZgAaNLk5refHjKuovUmHo2mahmbQ_WTaNIbHjMqpxbRi28n7sllEmrus2kzedMHRoDNLA')"></div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold bg-success/10 text-success border border-success/20">
+                                Aktif
+                            </span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2 line-clamp-1">Tech Summit Jakarta 2023</h3>
+<div class="space-y-2 mb-4 flex-1">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-sm text-body-sm">15-17 November 2023</span>
+</div>
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-body-sm text-body-sm line-clamp-1">Jakarta Convention Center</span>
+</div>
+</div>
+<div class="pt-4 border-t border-border-light grid grid-cols-2 gap-4">
+<div>
+<div class="font-label-sm text-label-sm text-text-muted mb-1">Registrasi</div>
+<div class="font-label-md text-label-md text-text-main">
+                                    1,240 <span class="text-text-muted font-normal text-[12px]">/ 1,500</span>
+</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-text-muted mb-1">Kehadiran</div>
+<div class="flex items-center gap-1.5">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+<span class="font-label-md text-label-md text-text-main">82%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hover Overlay Actions -->
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+<button class="bg-surface-container-lowest text-text-main p-2 rounded-lg hover:text-secondary shadow-sm">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-label-md shadow-sm">
+                            Kelola Event
+                        </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-light overflow-hidden shadow-sm hover:shadow-md transition-shadow group relative flex flex-col">
+<div class="h-32 bg-surface-container relative w-full overflow-hidden">
+<div class="bg-cover bg-center w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-300" data-alt="A close up of a registration desk at a corporate event with lanyards neatly arranged on a white table. Clean, bright, and organized setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCAntxNRBvrUM_WwpH8GKJelT1cwWM98nlJOAgMa0ri787znR-k-CCYxViEEeZ0GyW_OXDEqLBc84ika9ywVKB2SEg7CG3SF_L6nHWeBqM7q5Ewoj6ZeqRpF89-BksmzWBafj68ao9mbon0dzaIe3o4MM1Z6Zst_B0jh4L0IADixvCpJvLP_PQZaeUGOZiIu67zsY3Bdkmj_PXmMzEqi6zZBai_3CmXcIxSYTjCdb0B3DSIBU2eM3suddQfin-VU2PXmg4pmeBkrA')"></div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold bg-surface-container-highest text-text-muted border border-border-light">
+                                Draft
+                            </span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2 line-clamp-1">Workshop Kepemimpinan 2024</h3>
+<div class="space-y-2 mb-4 flex-1">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-sm text-body-sm">12 Februari 2024</span>
+</div>
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-body-sm text-body-sm line-clamp-1">Hotel Indonesia Kempinski</span>
+</div>
+</div>
+<div class="pt-4 border-t border-border-light grid grid-cols-2 gap-4 opacity-50">
+<div>
+<div class="font-label-sm text-label-sm text-text-muted mb-1">Registrasi</div>
+<div class="font-label-md text-label-md text-text-main">
+                                    0 <span class="text-text-muted font-normal text-[12px]">/ 200</span>
+</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-text-muted mb-1">Kehadiran</div>
+<div class="flex items-center gap-1.5">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 0%"></div>
+</div>
+<span class="font-label-md text-label-md text-text-main">0%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hover Overlay Actions -->
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+<button class="bg-surface-container-lowest text-text-main p-2 rounded-lg hover:text-secondary shadow-sm">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-label-md shadow-sm">
+                            Lanjutkan Draft
+                        </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-light overflow-hidden shadow-sm group relative flex flex-col opacity-75">
+<div class="h-32 bg-surface-container relative w-full overflow-hidden grayscale">
+<div class="bg-cover bg-center w-full h-full opacity-80" data-alt="A blurry background of a crowded exhibition hall with people walking around booths. Soft lighting, conveying a past, successful event." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBjp4yKd5k6hedWh9TNs24QIeGT0q6bP_yFWw-8Va452jhcUq59NQsa0p-i9-eV6kEKD644WL9D0ZVpleST9i171NCsSUdR_iVpDldYp7BF6jvusLSi1MbrcFbD_Wqdbf9e8C6gAs8uRPjqvAv-bot1w5aKfgyIRUP6TubthtpBhEN9_G2FmdFXvJyemrGd6W_fMhuKTn5Q1S0PMV6VI0on4Q5lRXyExxB3M57L9WHj4IGlpCZKXNwBVGGp0lW7MHpgfK1mUr5dgw')"></div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold bg-surface-container-high text-text-main border border-border-light">
+                                Selesai
+                            </span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2 line-clamp-1">Simposium Medis Nasional</h3>
+<div class="space-y-2 mb-4 flex-1">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-sm text-body-sm">05-06 Oktober 2023</span>
+</div>
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-body-sm text-body-sm line-clamp-1">Bali Nusa Dua Convention Center</span>
+</div>
+</div>
+<div class="pt-4 border-t border-border-light grid grid-cols-2 gap-4">
+<div>
+<div class="font-label-sm text-label-sm text-text-muted mb-1">Registrasi</div>
+<div class="font-label-md text-label-md text-text-main">
+                                    850 <span class="text-text-muted font-normal text-[12px]">/ 850</span>
+</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-text-muted mb-1">Kehadiran</div>
+<div class="flex items-center gap-1.5">
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-success h-1.5 rounded-full" style="width: 95%"></div>
+</div>
+<span class="font-label-md text-label-md text-text-main">95%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hover Overlay Actions (View Only) -->
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+<button class="bg-surface-container-lowest text-text-main px-4 py-2 rounded-lg font-label-md text-label-md shadow-sm border border-border-light hover:text-secondary">
+                            Lihat Laporan
+                        </button>
+</div>
+</div>
+</div>
+<!-- Pagination (Mock) -->
+<div class="mt-8 flex justify-center">
+<div class="flex items-center gap-1">
+<button class="p-2 text-text-muted hover:bg-surface-container-low rounded-lg disabled:opacity-50">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-secondary text-on-secondary font-label-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-text-muted hover:bg-surface-container-low font-label-sm">2</button>
+<button class="p-2 text-text-muted hover:bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

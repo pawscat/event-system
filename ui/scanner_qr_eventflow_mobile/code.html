@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventFlow - QR Scanner Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "border-light": "#E5E7EB",
+                        "danger": "#EF4444",
+                        "surface-container-high": "#e9e7eb",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#b08d5b",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#081b3a",
+                        "on-tertiary-fixed": "#291800",
+                        "secondary-container": "#645efb",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1a2b4b",
+                        "outline-variant": "#c5c6cf",
+                        "on-background": "#1b1b1e",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#4b41e1",
+                        "surface": "#fbf8fc",
+                        "secondary-fixed": "#e2dfff",
+                        "surface-tint": "#4e5e81",
+                        "surface-container-highest": "#e4e2e5",
+                        "tertiary-fixed": "#ffddb1",
+                        "tertiary-container": "#3e2700",
+                        "outline": "#75777f",
+                        "background": "#fbf8fc",
+                        "inverse-on-surface": "#f2f0f3",
+                        "background-subtle": "#F9FAFB",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f5f3f6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#8293b8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "text-muted": "#6B7280",
+                        "inverse-surface": "#303033",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "on-secondary-fixed": "#0f0069",
+                        "on-primary-fixed-variant": "#364768",
+                        "surface-bright": "#fbf8fc",
+                        "error": "#ba1a1a",
+                        "primary": "#031635",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "surface-variant": "#e4e2e5",
+                        "inverse-primary": "#b6c6ef",
+                        "on-error": "#ffffff",
+                        "success": "#10B981",
+                        "surface-container": "#efedf0",
+                        "on-surface": "#1b1b1e",
+                        "tertiary": "#231400",
+                        "on-surface-variant": "#44474e",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbd9dc",
+                        "warning": "#F59E0B"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-collapsed": "80px",
+                        "container-max": "1280px",
+                        "gutter": "16px",
+                        "margin-page": "24px",
+                        "sidebar-width": "260px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scanner-cutout {
+            box-shadow: 0 0 0 9999px rgba(17, 24, 39, 0.7);
+        }
+        
+        .scan-line {
+            animation: scan 2s infinite linear;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-on-surface font-body-md text-body-md h-screen w-full overflow-hidden flex flex-col relative select-none">
+<!-- Simulated Camera Feed Background -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-90" data-alt="A slightly blurry, first-person view of an event registration desk with lanyards, a laptop, and a blurred participant in the background, simulating a live smartphone camera feed. High contrast, realistic lighting, modern event setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsDSJ_6Q_F5733TF0sMi3Gqrw4suAh2GTGYZ60J3Rt73Hz6MfCBYbqFfmt7xccs1GrLvLwQ4VcrWD9Ar_BnYKj6r-g2EJ0OSDtmBhMeNYI6CO4pCosUKbDwX-3-Msll8t3Vl55tlZh8ESqGoaD0dJ_DC0CD26IAIzy8R4YIbd1Pq1iDZh6ATjmetr3Zo6iTFZBQwZSroPQ1nQLiZrQdYzar9GW7w-SecSCvp-CBeB9omppjHvdpOe0O-fNws6P_uM9GxdjqDN9pA"/>
+</div>
+<!-- Top Navigation (Task-Focused) -->
+<header class="relative z-20 flex justify-between items-center px-4 pt-6 pb-4 w-full">
+<button aria-label="Tutup Pemindai" class="p-2 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-black/60 transition-colors">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<button class="flex items-center gap-2 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full text-white hover:bg-black/60 transition-colors">
+<span class="font-label-md text-label-md truncate max-w-[150px]">Global Tech Summit '24</span>
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</header>
+<!-- Scanner Area Overlay -->
+<div class="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none w-full">
+<!-- Target Frame with Cutout -->
+<div class="relative w-[260px] h-[260px] rounded-xl scanner-cutout">
+<!-- Animated Scan Line -->
+<div class="absolute left-0 right-0 h-0.5 bg-success shadow-[0_0_8px_rgba(16,185,129,0.8)] scan-line z-10"></div>
+<!-- Corner Brackets -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-white rounded-tl-xl"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-white rounded-tr-xl"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-white rounded-bl-xl"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-white rounded-br-xl"></div>
+</div>
+<p class="text-white font-label-md text-label-md mt-8 text-center px-8 text-shadow-sm">
+            Arahkan QR Code peserta ke dalam bingkai
+        </p>
+<!-- Camera Controls -->
+<div class="flex gap-6 mt-8 pointer-events-auto">
+<button class="flex flex-col items-center gap-2 text-white">
+<div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">flashlight_on</span>
+</div>
+<span class="font-label-sm text-label-sm text-white/80">Senter</span>
+</button>
+<button class="flex flex-col items-center gap-2 text-white">
+<div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">flip_camera_ios</span>
+</div>
+<span class="font-label-sm text-label-sm text-white/80">Kamera</span>
+</button>
+</div>
+</div>
+<!-- Bottom Sheet: Controls & Recent Scans -->
+<div class="relative z-30 bg-surface w-full rounded-t-3xl shadow-[0_-8px_32px_rgba(0,0,0,0.15)] flex flex-col flex-shrink-0 mt-auto pb-8">
+<!-- Drag Handle Indicator -->
+<div class="w-full flex justify-center pt-3 pb-1">
+<div class="w-12 h-1.5 rounded-full bg-outline-variant/50"></div>
+</div>
+<div class="px-margin-page pt-4 pb-6 flex flex-col gap-6">
+<!-- Manual Entry Action -->
+<button class="w-full bg-secondary text-on-secondary font-label-md text-label-md py-3.5 rounded-lg shadow-sm flex items-center justify-center gap-2 hover:bg-secondary/90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">keyboard</span>
+                Input Kode Manual
+            </button>
+<!-- Recent Scans Section -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-sm-mobile text-headline-sm-mobile text-text-main">Riwayat Scan</h2>
+<span class="font-label-sm text-label-sm text-secondary">Lihat Semua</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Scan Item 1 -->
+<div class="flex items-center gap-4 p-3 rounded-xl border border-border-light bg-surface-container-lowest">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young Indonesian woman with a neutral expression, corporate lighting, solid soft background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF1mjKK4fRA2UBrqH_96USYyQj7TE0hfnjCSUEBgWISmgZgRtV2g0Xh8_HNHaZurZT816hKS4OptJdJT0bp8BzVj80E1wSBd4mtnNvLEFuNigDe6SzsrnYnGjvN8QGipaoUOKkNN2Q43FDLiUu3lDwG4D4JsR7OiszdIA-H0sZgbsjJ8vpi0SDj3v8UJAUOhuZ4O22t5FuQIeo83tFT0lC_xSg6y7VZZsx38qFscDP8zTYij4hEQEa_FZ8ojiims91bfW_iDTtrQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-text-main truncate">Budi Santoso</p>
+<p class="font-body-sm text-body-sm text-text-muted truncate">VIP Pass • TIK-8921</p>
+</div>
+<div class="bg-[#D1FAE5] text-[#065F46] px-2.5 py-1 rounded-md flex items-center gap-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-sm text-label-sm">Hadir</span>
+</div>
+</div>
+<!-- Scan Item 2 -->
+<div class="flex items-center gap-4 p-3 rounded-xl border border-border-light bg-surface-container-lowest">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0 flex items-center justify-center text-primary font-headline-sm">
+                            AW
+                        </div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-text-main truncate">Ayu Wulandari</p>
+<p class="font-body-sm text-body-sm text-text-muted truncate">Regular • TIK-3342</p>
+</div>
+<div class="bg-[#D1FAE5] text-[#065F46] px-2.5 py-1 rounded-md flex items-center gap-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-sm text-label-sm">Hadir</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

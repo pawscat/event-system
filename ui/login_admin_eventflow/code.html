@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masuk - EventFlow Admin</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Custom Configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "border-light": "#E5E7EB",
+                        "danger": "#EF4444",
+                        "surface-container-high": "#e9e7eb",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#b08d5b",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#081b3a",
+                        "on-tertiary-fixed": "#291800",
+                        "secondary-container": "#645efb",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1a2b4b",
+                        "outline-variant": "#c5c6cf",
+                        "on-background": "#1b1b1e",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#4b41e1",
+                        "surface": "#fbf8fc",
+                        "secondary-fixed": "#e2dfff",
+                        "surface-tint": "#4e5e81",
+                        "surface-container-highest": "#e4e2e5",
+                        "tertiary-fixed": "#ffddb1",
+                        "tertiary-container": "#3e2700",
+                        "outline": "#75777f",
+                        "background": "#fbf8fc",
+                        "inverse-on-surface": "#f2f0f3",
+                        "background-subtle": "#F9FAFB",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f5f3f6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#8293b8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "text-muted": "#6B7280",
+                        "inverse-surface": "#303033",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "on-secondary-fixed": "#0f0069",
+                        "on-primary-fixed-variant": "#364768",
+                        "surface-bright": "#fbf8fc",
+                        "error": "#ba1a1a",
+                        "primary": "#031635",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "surface-variant": "#e4e2e5",
+                        "inverse-primary": "#b6c6ef",
+                        "on-error": "#ffffff",
+                        "success": "#10B981",
+                        "surface-container": "#efedf0",
+                        "on-surface": "#1b1b1e",
+                        "tertiary": "#231400",
+                        "on-surface-variant": "#44474e",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbd9dc",
+                        "warning": "#F59E0B"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-collapsed": "80px",
+                        "container-max": "1280px",
+                        "gutter": "16px",
+                        "margin-page": "24px",
+                        "sidebar-width": "260px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for subtle animations and focus rings */
+        .input-focus-ring:focus-within {
+            box-shadow: 0 0 0 2px rgba(3, 22, 53, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-subtle h-screen w-full font-body-md text-text-main overflow-hidden flex">
+<!-- Left Column: Form Section -->
+<div class="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 py-12 lg:px-24 bg-surface-container-lowest shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-10 relative h-full">
+<div class="w-full max-w-sm flex flex-col items-center">
+<!-- Brand Anchor -->
+<div class="flex flex-col items-center mb-10">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">EventFlow</h1>
+<p class="font-body-sm text-text-muted mt-2 text-center">Sistem Manajemen Logistik Enterprise</p>
+</div>
+<!-- Form Container -->
+<form class="w-full space-y-5" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-text-main" for="email">Email Admin</label>
+<div class="relative input-focus-ring rounded-lg transition-shadow">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-2.5 bg-surface border border-border-light rounded-lg font-body-md text-text-main placeholder:text-text-muted focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="email" name="email" placeholder="admin@perusahaan.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-text-main" for="password">Kata Sandi</label>
+<div class="relative input-focus-ring rounded-lg transition-shadow">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-11 pr-11 py-2.5 bg-surface border border-border-light rounded-lg font-body-md text-text-main placeholder:text-text-muted focus:ring-1 focus:ring-primary focus:border-primary transition-colors outline-none" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-text-muted hover:text-primary transition-colors focus:outline-none" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="visibilityIcon">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Secondary Actions -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-border-light text-primary focus:ring-primary focus:ring-offset-0 bg-surface cursor-pointer" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block font-body-sm text-text-muted cursor-pointer select-none" for="remember-me">
+                            Ingat saya
+                        </label>
+</div>
+<div class="text-sm">
+<a class="font-label-sm text-primary hover:text-secondary-container transition-colors" href="#">
+                            Lupa kata sandi?
+                        </a>
+</div>
+</div>
+<!-- Submit Action -->
+<div class="pt-4">
+<button class="w-full flex justify-center items-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm font-label-md text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors" type="submit">
+                        Masuk Dashboard
+                    </button>
+</div>
+</form>
+<!-- Footer text -->
+<p class="mt-10 font-body-sm text-text-muted text-center">
+                Portal ini khusus untuk administrator internal.<br/>Hubungi IT Support jika mengalami kendala.
+            </p>
+</div>
+</div>
+<!-- Right Column: Visual Section -->
+<div class="hidden lg:block lg:w-1/2 relative bg-surface-container">
+<!-- Abstract Illustration via Placeholder -->
+<div class="absolute inset-0 w-full h-full">
+<div class="w-full h-full bg-cover bg-center bg-no-repeat opacity-90 mix-blend-multiply" data-alt="A clean, modern, abstract 3D illustration representing enterprise networking and event logistics. The scene features glowing, interconnected geometric nodes and soft fluid data streams flowing through a pristine, light-mode environment. The color palette is dominated by deep navy blues, subtle purples, and crisp whites. The lighting is soft and studio-quality, conveying trust, precision, and seamless data synchronization in a professional B2B SaaS context." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCnvtDzmGKAaLtznrkKOtVxBweVjh_AqYqHjy3ya-VIvvwfPhr2nNLa9IAh5AEMeQ4Wo-Sc0m9vCs7ID7RkzdBCdmcpXP_4Ox2XNTjZpOuVtnp6lFzuThSXjdbzFC8vnBMrvRNwUEoX6I1yGZcCa-rWWTRaKqKMzdTOskCJx9aY5tCABGep9mAFUR-WpdensGNiKVMk7PYYdmax-fhgcxI9KJXpS2lTtIEBoQ7d_2IWTITkvFKQ4NwTShgh2j4vzvoICY4XIVSI4g')"></div>
+</div>
+<!-- Decorative Overlay Gradient to blend with the light theme -->
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-low/40 to-primary-fixed/20"></div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const visibilityIcon = document.getElementById('visibilityIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                visibilityIcon.textContent = 'visibility';
+            } else {
+                passwordInput.type = 'password';
+                visibilityIcon.textContent = 'visibility_off';
+            }
+        }
+    </script>
+</body></html>
