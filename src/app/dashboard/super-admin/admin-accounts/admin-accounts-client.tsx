@@ -27,7 +27,7 @@ interface Event {
   name: string
 }
 
-export default function AdminAccountsClient({ initialUsers, events, currentUserId }: { initialUsers: User[], events: Event[], currentUserId: string }) {
+export default function AdminAccountsClient({ initialUsers, events, currentUserId }: { initialUsers: User[], events: Event[], currentUserId?: string }) {
   const [users, setUsers] = useState<User[]>(initialUsers)
   const [search, setSearch] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -216,26 +216,25 @@ export default function AdminAccountsClient({ initialUsers, events, currentUserI
   }
 
   const handleDeleteUser = async (user: User) => {
-    if (user.id === currentUserId) return
-
-    if (!confirm(`PERINGATAN: Apakah Anda yakin ingin MENGHAPUS PERMANEN akun ${user.full_name}? Aksi ini tidak dapat dibatalkan.`)) return
+    if (user.id === currentUserId) {
+      alert('Anda tidak dapat menghapus akun Anda sendiri.')
+      return
+    }
     
-    setIsSubmitting(true)
-    try {
-      const res = await fetch(`/api/v1/admin/users/${user.id}`, {
-        method: 'DELETE'
-      })
-      
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'Gagal menghapus akun.')
-      }
+    if (!window.confirm(`Yakin ingin menghapus akun ${user.full_name}? Tindakan ini tidak dapat dibatalkan.`)) {
+      return
+    }
 
+    try {
+      const res = await fetch(`/api/v1/admin/users/${user.id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Gagal menghapus user')
+      }
+      // Remove from state
       setUsers(prev => prev.filter(u => u.id !== user.id))
     } catch (err: any) {
-      alert(err?.message || 'Terjadi kesalahan sistem saat menghapus akun.')
-    } finally {
-      setIsSubmitting(false)
+      alert(err.message)
     }
   }
 

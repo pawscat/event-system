@@ -73,11 +73,11 @@ export default async function AdminAccountsPage() {
     .order('name', { ascending: true })
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="flex justify-between items-center mb-8">
+    <div className="space-y-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-headline-md font-bold text-text-main">Manajemen Admin</h1>
-          <p className="text-body-md text-text-muted mt-1">Kelola seluruh akun Admin dan penugasan event-nya</p>
+          <h1 className="text-headline-lg text-[28px] font-semibold text-text-main">Manajemen Akun Admin</h1>
+          <p className="text-body-sm text-[14px] text-text-muted mt-1">Kelola akses, role, dan penugasan event untuk staf</p>
         </div>
         <Link
           href="/dashboard/super-admin/admin-accounts/new"
@@ -87,7 +87,6 @@ export default async function AdminAccountsPage() {
           Tambah Admin
         </Link>
       </div>
-
       <div className="bg-surface rounded-2xl shadow-sm border border-border-light overflow-hidden flex-1 flex flex-col">
         {error ? (
           <div className="p-8 text-center text-error">Gagal memuat data akun admin. Detail: {error.message}</div>
