@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { EventForm } from '../../event-form'
+import { EventForm } from '@/app/dashboard/super-admin/events/event-form'
 
 export default async function EditEventPage(props: { params: Promise<{ eventId: string }> }) {
   const params = await props.params;
