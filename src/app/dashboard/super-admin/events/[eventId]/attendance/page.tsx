@@ -23,7 +23,8 @@ export default async function AttendancePage(props: { params: Promise<{ eventId:
       id,
       checked_in_at,
       checked_in_by,
-      participants ( full_name, email, registration_code ),
+      participants ( full_name, email_normalized ),
+      tickets ( guest_id ),
       users ( full_name )
     `)
     .eq('event_id', eventId)
@@ -60,9 +61,13 @@ export default async function AttendancePage(props: { params: Promise<{ eventId:
                     </td>
                     <td className="p-4">
                       <p className="font-label-md text-[14px] font-semibold text-text-main">{participant?.full_name}</p>
-                      <p className="font-body-sm text-[12px] text-text-muted">{participant?.email}</p>
+                      <p className="font-body-sm text-[12px] text-text-muted">{participant?.email_normalized}</p>
                     </td>
-                    <td className="p-4 font-mono text-[14px] text-text-main">{participant?.registration_code}</td>
+                    <td className="p-4">
+                      <span className="font-mono text-[12px] bg-surface-container-high px-2 py-1 rounded text-text-muted">
+                        {(Array.isArray(a.tickets) ? a.tickets[0] : a.tickets)?.guest_id || 'N/A'}
+                      </span>
+                    </td>
                     <td className="p-4 font-body-sm text-[14px] text-text-main">{user?.full_name || 'Sistem'}</td>
                   </tr>
                 )

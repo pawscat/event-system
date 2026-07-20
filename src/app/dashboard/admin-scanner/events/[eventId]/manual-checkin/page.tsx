@@ -1,13 +1,9 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export default async function ManualCheckinPage(props: { params: Promise<{ eventId: string }> }) {
   const params = await props.params;
   const { eventId } = params;
-  return (
-    <div className="bg-surface p-6 rounded-xl border border-border-light shadow-sm">
-      <h3 className="font-title-md font-semibold mb-4 text-text-main">Halaman Manual Check-in</h3>
-      <p className="text-body-sm text-text-muted">Sedang dalam tahap pengembangan.</p>
-    </div>
-  )
+  
+  // Manual check-in is integrated into the scanner UI
+  redirect(`/dashboard/admin-scanner/events/${eventId}/scan`)
 }

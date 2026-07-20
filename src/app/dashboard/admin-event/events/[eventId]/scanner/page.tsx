@@ -1,13 +1,11 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import ScannerClient from '@/app/dashboard/admin-scanner/events/[eventId]/scan/scanner-client'
 
-export default async function ScannerPage(props: { params: Promise<{ eventId: string }> }) {
+export default async function AdminEventScannerPage(props: { params: Promise<{ eventId: string }> }) {
   const params = await props.params;
   const { eventId } = params;
-  return (
-    <div className="bg-surface p-6 rounded-xl border border-border-light shadow-sm">
-      <h3 className="font-title-md font-semibold mb-4 text-text-main">Halaman Scanner</h3>
-      <p className="text-body-sm text-text-muted">Sedang dalam tahap pengembangan.</p>
-    </div>
-  )
+
+  // Admin Event always has permission to do manual check-in
+  return <ScannerClient eventId={eventId} manualCheckinAllowed={true} />
 }
