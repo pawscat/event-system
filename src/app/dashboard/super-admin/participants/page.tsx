@@ -19,7 +19,7 @@ export default async function GlobalParticipantsPage() {
   // Fetch all participants and their event name using foreign key relationship
   const { data: participants, error } = await supabase
     .from('participants')
-    .select('*, event:events(name, slug), ticket:tickets(ticket_status)')
+    .select('*, event:events(id, name, slug), ticket:tickets(ticket_status)')
     .order('registered_at', { ascending: false })
 
   return (
@@ -46,6 +46,7 @@ export default async function GlobalParticipantsPage() {
                   <th className="p-4">Asal Event</th>
                   <th className="p-4">Status Check-in</th>
                   <th className="p-4">Waktu Daftar</th>
+                  <th className="p-4 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody className="text-body-sm text-[14px] text-text-main divide-y divide-border-light">
@@ -92,6 +93,19 @@ export default async function GlobalParticipantsPage() {
                           month: 'short',
                           year: 'numeric'
                         })}
+                      </td>
+                      <td className="p-4 text-center">
+                        {eventData?.id ? (
+                          <Link 
+                            href={`/dashboard/super-admin/events/${eventData.id}/participants/${p.id}/edit`}
+                            className="p-2 inline-flex items-center justify-center text-text-muted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                            title="Kelola Peserta"
+                          >
+                            <span className="material-symbols-outlined text-[20px]">manage_accounts</span>
+                          </Link>
+                        ) : (
+                          <span className="text-text-muted italic">-</span>
+                        )}
                       </td>
                     </tr>
                   )
