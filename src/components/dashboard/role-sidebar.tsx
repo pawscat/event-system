@@ -27,26 +27,35 @@ export function SidebarNav({ dashboardType }: { dashboardType: DashboardType }) 
       ...(eventId ? [
         { href: `/dashboard/admin-event/events/${eventId}/overview`, label: 'Ringkasan Acara', icon: 'event_note' },
         { href: `/dashboard/admin-event/events/${eventId}/participants`, label: 'Peserta', icon: 'group' },
+        { href: `/dashboard/admin-event/events/${eventId}/import`, label: 'Import Peserta', icon: 'upload_file' },
+        { href: `/dashboard/admin-event/events/${eventId}/tickets`, label: 'Tiket', icon: 'local_activity' },
+        { href: `/dashboard/admin-event/events/${eventId}/scanner`, label: 'Scanner', icon: 'qr_code_scanner' },
+        { href: `/dashboard/admin-event/events/${eventId}/attendance`, label: 'Kehadiran', icon: 'how_to_reg' },
+        { href: `/dashboard/admin-event/events/${eventId}/email-templates`, label: 'Template Email', icon: 'forward_to_inbox' },
+        { href: `/dashboard/admin-event/events/${eventId}/broadcasts`, label: 'Broadcasts', icon: 'campaign' },
         { href: `/dashboard/admin-event/events/${eventId}/team`, label: 'Tim & Staf', icon: 'badge' },
-        { href: `/dashboard/admin-event/events/${eventId}/broadcasts`, label: 'Email & Broadcast', icon: 'mail' },
         { href: `/dashboard/admin-event/events/${eventId}/reports`, label: 'Laporan', icon: 'receipt_long' },
+        { href: `/dashboard/admin-event/events/${eventId}/settings`, label: 'Pengaturan', icon: 'settings' },
       ] : [])
     ]
   } else if (dashboardType === 'admin-registrasi') {
     links = [
       { href: '/dashboard/admin-registrasi', label: 'Pilih Acara', icon: 'dashboard' },
       ...(eventId ? [
-        { href: `/dashboard/admin-registrasi/events/${eventId}/participants`, label: 'Meja Registrasi', icon: 'how_to_reg' },
-        { href: `/dashboard/admin-registrasi/events/${eventId}/import`, label: 'Import Excel/CSV', icon: 'upload_file' },
-        { href: `/dashboard/admin-registrasi/events/${eventId}/issues`, label: 'Masalah Email', icon: 'error' },
+        { href: `/dashboard/admin-registrasi/events/${eventId}/participants`, label: 'Peserta', icon: 'group' },
+        { href: `/dashboard/admin-registrasi/events/${eventId}/participants/new`, label: 'Tambah Peserta', icon: 'person_add' },
+        { href: `/dashboard/admin-registrasi/events/${eventId}/import`, label: 'Import Peserta', icon: 'upload_file' },
+        { href: `/dashboard/admin-registrasi/events/${eventId}/ticket-status`, label: 'Status Tiket & Email', icon: 'mark_email_read' },
+        { href: `/dashboard/admin-registrasi/events/${eventId}/registration-preview`, label: 'Preview Form', icon: 'preview' },
       ] : [])
     ]
   } else if (dashboardType === 'admin-scanner') {
     links = [
       { href: '/dashboard/admin-scanner', label: 'Pilih Acara', icon: 'dashboard' },
       ...(eventId ? [
-        { href: `/dashboard/admin-scanner/events/${eventId}/scan`, label: 'QR Scanner', icon: 'qr_code_scanner' },
-        { href: `/dashboard/admin-scanner/events/${eventId}/manual-checkin`, label: 'Check-in Manual', icon: 'fact_check' },
+        { href: `/dashboard/admin-scanner/events/${eventId}/scan`, label: 'Scan QR', icon: 'qr_code_scanner' },
+        { href: `/dashboard/admin-scanner/events/${eventId}/manual-checkin`, label: 'Manual Check-in', icon: 'fact_check' },
+        { href: `/dashboard/admin-scanner/events/${eventId}/recent-checkins`, label: 'Check-ins Terbaru', icon: 'history' },
       ] : [])
     ]
   }

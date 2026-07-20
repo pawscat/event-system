@@ -158,7 +158,7 @@ export default async function ParticipantsPage(props: { params: Promise<{ eventI
                         <button className="p-1.5 text-text-muted hover:text-secondary hover:bg-secondary/10 rounded transition-colors" title="Kirim Ulang">
                           <span className="material-symbols-outlined text-[18px]">send</span>
                         </button>
-                        <Link href={`/dashboard/admin-registrasi/participants/${participant.id}/edit`} className="p-1.5 text-text-muted hover:text-primary hover:bg-primary/10 rounded transition-colors" title="Edit">
+                        <Link href={`/dashboard/admin-registrasi/events/${eventId}/participants/${participant.id}/edit`} className="p-1.5 text-text-muted hover:text-primary hover:bg-primary/10 rounded transition-colors" title="Edit">
                           <span className="material-symbols-outlined text-[18px]">edit</span>
                         </Link>
                       </div>
