@@ -51,30 +51,35 @@ export default async function RecentCheckinsPage(props: { params: Promise<{ even
               </tr>
             </thead>
             <tbody className="text-body-sm text-[14px]">
-              {attendances?.map((att) => (
-                <tr key={att.id} className="border-b border-border-light hover:bg-surface-container-low/50 transition-colors">
-                  <td className="py-3 px-4">
-                    <div className="font-medium text-text-main">{att.participants?.full_name}</div>
-                    <div className="text-text-muted text-[13px]">{att.participants?.organization || 'Umum'}</div>
-                  </td>
-                  <td className="py-3 px-4 font-mono text-primary font-medium">{att.tickets?.guest_id}</td>
-                  <td className="py-3 px-4 text-text-main font-medium">
-                    {new Date(att.checked_in_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                  </td>
-                  <td className="py-3 px-4">
-                    <div className="flex items-center gap-2">
-                      <span className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider ${
-                        att.method === 'qr' ? 'bg-primary/10 text-primary' : 'bg-warning/10 text-warning-dark'
-                      }`}>
-                        {att.method === 'qr' ? 'QR Scan' : 'Manual'}
-                      </span>
-                    </div>
-                    <div className="text-text-muted text-[12px] mt-1 line-clamp-1" title={`Petugas: ${att.users?.full_name}`}>
-                      {att.users?.full_name}
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {attendances?.map((att) => {
+                const participant = Array.isArray(att.participants) ? att.participants[0] : att.participants
+                const ticket = Array.isArray(att.tickets) ? att.tickets[0] : att.tickets
+                const user = Array.isArray(att.users) ? att.users[0] : att.users
+                return (
+                  <tr key={att.id} className="border-b border-border-light hover:bg-surface-container-low/50 transition-colors">
+                    <td className="py-3 px-4">
+                      <div className="font-medium text-text-main">{participant?.full_name}</div>
+                      <div className="text-text-muted text-[13px]">{participant?.organization || 'Umum'}</div>
+                    </td>
+                    <td className="py-3 px-4 font-mono text-primary font-medium">{ticket?.guest_id}</td>
+                    <td className="py-3 px-4 text-text-main font-medium">
+                      {new Date(att.checked_in_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                    </td>
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-2">
+                        <span className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider ${
+                          att.method === 'qr' ? 'bg-primary/10 text-primary' : 'bg-warning/10 text-warning-dark'
+                        }`}>
+                          {att.method === 'qr' ? 'QR Scan' : 'Manual'}
+                        </span>
+                      </div>
+                      <div className="text-text-muted text-[12px] mt-1 line-clamp-1" title={`Petugas: ${user?.full_name}`}>
+                        {user?.full_name}
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
               
               {(!attendances || attendances.length === 0) && (
                 <tr>
